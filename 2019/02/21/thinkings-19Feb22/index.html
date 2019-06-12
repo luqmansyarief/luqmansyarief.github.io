@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<title>写在初试失败之后 | Sirice&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sirice&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sirice&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">写在初试失败之后</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sirice</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 21, 2019&nbsp;&nbsp;23:15:05</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <section class="post-content">
+            <p><strong>前言</strong></p>
+<p>这是一条很私人的想法，用来记录2019考研一战失败之后的心情，至于借鉴意义，那当然是完全不可能有的……但似乎一写就停不下来了，顺便回忆一下大学的生活。</p>
+<p><strong>回忆记事</strong></p>
+<p>其实从大学中期就知道自己多半是要考研了。。大一觉得考研不如去工作，但随着对计算机行业的接触，越来越认识到学历对这个行业的深度的重要程度，大一的时候现在看来主要还是瞎玩的状态，但确实玩的还挺开心的。大学四年每年都在研究不一样的领域，真的是体会到了学习的快乐（这种屁话真不像我说的）</p>
+<p>大一从下学期开始媒体图像专业课（PS）对平面设计和视觉设计产生兴趣，于是读了很多书，好在我大工程图书馆给力《写给大家看的设计书》《色彩心理学》等设计书籍在图书馆那是应有尽有，我从这些书中学到各种设计规范和细节的实施，做出的算是第一个真正意义上的视觉作品《印象哈工程PPT》参加ppt设计大赛中脱颖而出，这是我大学中得到最愉快的一个奖。<em>（国防院的一等奖其实是胜券在握的没什么难度，因为国防的兄弟们不太会煽情2333）</em></p>
+<p>这个奖某种意义上是点燃我的大学真正的开始，因为这是一个好像“通过自学并加入自己的理解可以脱颖而出”的证明。</p>
+<p>大二开始从视觉设计转向前端学习，具体应该是16年4月，这时候我完成了一个百度前端学院的任务，这个静态页的设计是百度提供psd，但我是在学习前端基础之后在竞赛完成者的代码参考下上完全自己写的，包括页面元素的动效交互，按钮的触发延时、装饰横线的CSS运动时延。我现在看到这个网页还是觉得这个项目写的超越了大部分提交。<a href="https://sirice19.github.io/CollageWei_Task7/">点击预览</a> 大二除了学前端基本就是在忙社团，当然那就是另一个故事了，可能毕业的时候再写博文吧。</p>
+<p>大二下看到了马士兵的java教程，这个教程是jdk1.6版本的，是2006年出的教程，但讲的十分清晰，这套教程直接教会了大二并没有学明白的java课程。后来用java实现了所有基础数据结构和算法。这时候感觉“找工作好像挺简单的样子” 既然这么简单那想想考研？？</p>
+<p><strong>初衷</strong></p>
+<p>大三开始（正题来了！）打算考研，这个初衷不是因为随大流考研，也不是为了逃避工作，而是这时候有了一个全新的打算。经过两次实训，真的厌倦了CRUD的业务代码，想转数据科学，去搞数据挖掘和复杂数据分析。但这个起点要求就是硕士学历，在18年百度工大宣讲时所有的岗位都是面向硕士以上的。因此决定还是要考研。</p>
+<p>院校的选择上来说一开始是东南大学，因为对建筑老牌名校总有着莫名的倾慕。直到看到《<strong>无问西东</strong>》这个电影，可以说是我在大学生涯中看到过的最好的电影。那个问题“什么是虚无，我能做什么，我想做什么”的思想引领和耀祖母亲作为老上海人充满时代前卫思想的台词太深入人心了。</p>
+<blockquote>
+<p>什么是真实，做什么和谁在一起，你看到什么听到什么，有一种从心灵深处满溢出来的不懊悔也不羞耻的平和与喜悦。 ——梅贻琦 答吴岭澜问</p>
+</blockquote>
+<p>于是产生了想试试魔都的想法，复旦大学是4个985里唯一同时不考计组和概率的，果断报名。直到现在出分虽然凉了我也还是觉得这个学校的难度真的不大，甚至相比东南更有把握。</p>
+<p><strong>理由</strong></p>
+<p>其实我在报名之后我爸就隐隐感觉这个目标对我来说有点太高了，现在看来失败是很正常的。但我的想法完全不是这样的，当年中考的时候，我的成绩距九中只差一点，实际调剂也能去，但却没敢报名，我的高中生活很单一很单调，没有电影里的那样精彩，只有力不从心的考试和周围一团散沙的同学。高考的时候又是差一点去985，虽然来到哈工程从结果来看也十分不错，但<u>我不想总是做一个差一点的人</u>，听家里安排太久了，一点冲劲都没有过，所以我选择了复旦，这个即使我初试失败也一点没有后悔的选择。</p>
+<blockquote>
+<p>愿你在迷茫时，坚信你的珍贵。爱你所爱，行你所行，听从你心，无问西东。</p>
+</blockquote>
+<p><strong>过程还是借口</strong></p>
+<p>其实复习的时候我真觉得复习的挺好的，从资料准备、战略战术到计划执行上都是差不多可以的感觉。数学在学到后期也算是融会贯通了，专业课也还不错的样子。复习数学时很有信心，我觉得初中2728大题、高中解析几何这些，换成高等数学就是中值定理，当年没有吓退我的，我一样可以战胜它。我到最后也没放弃证明题。</p>
+<p>考试的时候看到卷子感觉都不难，但一方面把结束时间看错了，11:30收卷当成11:00收，答完线代看表一下就慌了，而我正好是一个心态选手……另一方面其实说白了也是心态，前一天考数学内心的恐惧就像冰冷一样蔓延，考场上做到有理积分怎么算也算不出来。</p>
+<p>这一次没能战胜恐惧。</p>
+<p>我个人觉得评价一个人不能只看结果就评定的，“考这么点分就是不努力而已”这话我没有资格反驳，但我想说的是，运气、心态、环境等等，能影响人的关键外界因素实在是太多了。如果努力都能成功为什么世界上还会有运气这东西。</p>
+<ul>
+<li>战术上的教训：下一次考数学的话会安排更多的模拟。超越、共创、李林都当成考试来模拟。</li>
+</ul>
+<p><strong>前路</strong></p>
+<p>想了几天了还是没想好。现在是2月22日0:45,距15号出分已经7天了，如果天天纠结那是不会有结果的，路只有走了才知道。考研这事，只有特殊情况没有一般情况。</p>
+<p>调剂基本是没戏的，这个还是很清楚的。双非调剂如果去了那就完全违背我的初衷了，那就是我又妥协了，这最后一次机会又这样了。所以即使今年没机会我也绝对不会随便选一个。近期就准备找工作吧，有了稳定经济来源的话再做计划。</p>
+<p>如果一次失败就将就了，那可就太对不起以前的我了。呵</p>
+<p>写在最后，明年这时候希望可以看到全新的自己，当年的波折都是后来口中讲出的故事。</p>
+
+        </section>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sirice</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://sirice19.github.io/2019/02/21/thinkings-19Feb22/">https://sirice19.github.io/2019/02/21/thinkings-19Feb22/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>本文采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享 署名-非商业性使用-禁止演绎(CC BY-NC-ND)国际许可协议</a>进行许可</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tag/summary/"># summary</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/02/24/pat-BasicLevel-1001-1005/">PAT真题题解乙级1001-1005</a>
+            
+            
+            <a class="next" rel="next" href="/2019/02/16/MachineLearning-Iris/">机器学习入门Demo</a>
+            
+        </section>
+
+
+    </article>
+</div>
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sirice | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Sirice19/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+    </div>
+</body>
+</html>

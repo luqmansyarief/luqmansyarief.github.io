@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<title>混乱的三月 | Sirice&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sirice&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sirice&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">混乱的三月</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sirice</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">March 13, 2019&nbsp;&nbsp;10:19:13</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <section class="post-content">
+            <p>距离2月15日出分已经过去很久的时间了，经历了一些之后现在的确冷静多了。</p>
+<p>出分之后看了其他人的成绩，果然考外的还是失败的多，但其他班同学一样有考到400+的，没达到复试线还是说明自己菜，心态需要调整。3月初加入了调剂群，知道了去哪里找调剂信息和导师的联系方式，发了30+邮件没一个准确回复的，拒绝的倒是不少。数学二在调剂上的确非常费劲，这个是在考试前没有想到的。</p>
+<p>经历了一次失败之后顿觉没有成本去再做下一次赌博，所以想明年考的话可能是本校或者难度低点的985吧（但估计还是报本校的可能性更大一点。。）原计划是找个工作在职考，在职做到9月中旬去辞职全职复习，就这样开始了找工作的支线。</p>
+<p>找工作其实一点没有想的那么简单，首先是简历的制作，很遗憾的说，我也没能避免写出了上一届印象非常深刻的双选会上被扔在一边的学长的相似的简历，区别仅仅是我github上有几个简单的demo而已。投递了几家之后陆续接到了笔试通知，这时哈工程的大名绝对起到了至关重要的作用，因为有的更优秀简历的同学在初选就被刷掉了。最大的两家是招银网络和vivo，就笔试题来说，vivo比招银题要简单，招银的笔试题代码部分简直难的出乎意料。。。结果是vivo进入了面试，招银没有通过。</p>
+<p>一开始来北京是我内心莫名抗拒的事，原来觉得早晚要来一次北京，原来以为会是学术交流或者实验室派遣什么什么形式但没想到居然会以这种方式来北京……来北京住在室友住处看到了室友百度实习的状态，PM岗实习做着各种各样的工作加班到9点，中关村附近一个20平的公寓却4K月租，想了想这不是想象中的生活，或者说是同样的生活并不想在北京体验吧，这种环境的城市却要如此高的生活成本，对北京这个城市有点失望。</p>
+<p>面试问的不难，但我并没有怎么充分复习，就看了下Spring和JVM的相关，其他的准备随缘答，但果然校招是校招，问的确实不难，但细节部分还是差了很多，interface类有没有构造函数我答错了，这个简单的问题是决定性的失误，换位想一下我也不会给一个这个问题没有答对的人通过。还有一个static关键字的问题，两次面试都问到了，已经做了博文整理。3月13日上午接到了中科创达的HR电话，大连薪资税前8.6K，感觉有点可笑，有点讽刺又有点辛酸。</p>
+<p>经历了面试也知道了校招到底是个什么流程，工作是什么样的。现在冷静下来想一下还是想去考研，因为这件事没完，不管做什么都是要以考研来结束，这件事是一个逗号不是句号。下半年具体怎么安排还没有想好，但是基本应该是复习去了。</p>
+<p>在这一个月中想到的一些问题：面试说明基础知识细节不足，准备不充分；笔试说明刷题少，算法上code经验少；考研说明考场心态不行，乱了章法。</p>
+<p>今年要做的就是在数学上练时间和心态，英语一也要注意一下。另外时间充足的话了解下ML的基础和算法，完成Titanic的入门Kaggle，读一下Thinking in java。</p>
+<p>考研失败之后真的觉得什么面试笔试过不过都不重要了。这些都是小事，完全不care。现在要做的是准备下csp和之后的毕设，毕业了之后可能还会迷茫，但来北京这趟找到了之后的大方向，我觉得也不枉此程了吧。</p>
+<p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552459248077&di=11ccb031f10c613d67545d7fc71ead11&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201612%2F10%2F20161210175011_AHfGU.png" alt></p>
+
+        </section>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sirice</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://sirice19.github.io/2019/03/13/thinkings-19Mar13/">https://sirice19.github.io/2019/03/13/thinkings-19Mar13/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>本文采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享 署名-非商业性使用-禁止演绎(CC BY-NC-ND)国际许可协议</a>进行许可</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tag/summary/"># summary</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/03/20/graduateDesignRecord-BackEnd/">毕业设计记录日志(BackEnd:SpringBoot+MyBatis+MySQL)</a>
+            
+            
+            <a class="next" rel="next" href="/2019/03/11/java-static-keyword/">Java static关键字</a>
+            
+        </section>
+
+
+    </article>
+</div>
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sirice | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Sirice19/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+    </div>
+</body>
+</html>

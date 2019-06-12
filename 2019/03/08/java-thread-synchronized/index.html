@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<title>Java中线程同步的方法 | Sirice&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sirice&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sirice&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div id="post-toc" class="post-toc">
+            <span class="post-toc-title">catalogue</span>
+            <div class="post-toc-content">
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、同步方法"><span class="toc-text">一、同步方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、同步代码块"><span class="toc-text">二、同步代码块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#synchronized同步方法小结："><span class="toc-text">synchronized同步方法小结：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、wait与notify"><span class="toc-text">三、wait与notify</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、使用特殊域变量-volatile-实现线程同步"><span class="toc-text">四、使用特殊域变量(volatile)实现线程同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、使用重入锁实现线程同步"><span class="toc-text">五、使用重入锁实现线程同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、使用阻塞队列实现线程同步"><span class="toc-text">六、使用阻塞队列实现线程同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、使用原子变量实现线程同步"><span class="toc-text">七、使用原子变量实现线程同步</span></a></li></ol>
+            </div>
+        </div>
+    
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Java中线程同步的方法</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sirice</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">March 8, 2019&nbsp;&nbsp;12:17:54</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <section class="post-content">
+            <h3 id="一、同步方法"><a href="#一、同步方法" class="headerlink" title="一、同步方法"></a>一、同步方法</h3><p>　　即有synchronized关键字修饰的方法。 由于java的每个对象都有一个内置锁，当用此关键字修饰方法时， 内置锁会保护整个方法。在调用该方法前，需要获得内置锁，否则就处于阻塞状态。</p>
+<p>注： synchronized关键字也可以修饰静态方法，此时如果调用该静态方法，将会锁住整个类。</p>
+<h3 id="二、同步代码块"><a href="#二、同步代码块" class="headerlink" title="二、同步代码块"></a>二、同步代码块</h3><p>　　即有synchronized关键字修饰的语句块。 被该关键字修饰的语句块会自动被加上内置锁，从而实现同步</p>
+<p>代码如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">synchronized</span>(object)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 注：同步是一种高开销的操作，因此应该尽量减少同步的内容。通常没有必要同步整个方法，使用synchronized代码块同步关键代码即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.xhj.thread;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 线程同步的运用</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@author</span> XIEHEJUN</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SynchronizedThread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Bank</span> </span>&#123;</span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">int</span> account = <span class="number">100</span>;</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAccount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> account;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 用同步方法实现</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * <span class="doctag">@param</span> money</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(<span class="keyword">int</span> money)</span> </span>&#123;</span><br><span class="line">                account += money;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 用同步代码块实现</span></span><br><span class="line"><span class="comment">             *</span></span><br><span class="line"><span class="comment">             * <span class="doctag">@param</span> money</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save1</span><span class="params">(<span class="keyword">int</span> money)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">                    account += money;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">            <span class="keyword">private</span> Bank bank;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="title">NewThread</span><span class="params">(Bank bank)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">this</span>.bank = bank;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">                    <span class="comment">// bank.save1(10);</span></span><br><span class="line">                    bank.save(<span class="number">10</span>);</span><br><span class="line">                    System.out.println(i + <span class="string">"账户余额为："</span> + bank.getAccount());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 建立线程，调用内部类</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">useThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            Bank bank = <span class="keyword">new</span> Bank();</span><br><span class="line">            NewThread new_thread = <span class="keyword">new</span> NewThread(bank);</span><br><span class="line">            System.out.println(<span class="string">"线程1"</span>);</span><br><span class="line">            Thread thread1 = <span class="keyword">new</span> Thread(new_thread);</span><br><span class="line">            thread1.start();</span><br><span class="line">            System.out.println(<span class="string">"线程2"</span>);</span><br><span class="line">            Thread thread2 = <span class="keyword">new</span> Thread(new_thread);</span><br><span class="line">            thread2.start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">            SynchronizedThread st = <span class="keyword">new</span> SynchronizedThread();</span><br><span class="line">            st.useThread();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="synchronized同步方法小结："><a href="#synchronized同步方法小结：" class="headerlink" title="synchronized同步方法小结："></a>synchronized同步方法小结：</h4><p>给一个方法增加synchronized修饰符之后就可以使它成为同步方法，<u>这个方法可以是静态方法和非静态方法，但是不能是抽象类的抽象方法，也不能是接口中的接口方法。</u>下面代码是一个同步方法的示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">aMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">anotherMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、wait与notify"><a href="#三、wait与notify" class="headerlink" title="三、wait与notify"></a>三、wait与notify</h3><p>wait():使一个线程处于等待状态，并且释放所持有的对象的lock。<code>Object.wait()</code></p>
+<p>sleep():使一个正在运行的线程处于睡眠状态，是一个静态方法，调用此方法要捕捉InterruptedException异常。<code>Thread.sleep()</code></p>
+<p>notify():唤醒一个处于等待状态的线程，注意的是在调用此方法的时候，并不能确切的唤醒某一个等待状态的线程，而是由JVM确定唤醒哪个线程，而且不是按优先级。</p>
+<p>Allnotity():唤醒所有处入等待状态的线程，注意并不是给所有唤醒线程一个对象的锁，而是让它们竞争。</p>
+<h3 id="四、使用特殊域变量-volatile-实现线程同步"><a href="#四、使用特殊域变量-volatile-实现线程同步" class="headerlink" title="四、使用特殊域变量(volatile)实现线程同步"></a>四、使用特殊域变量(volatile)实现线程同步</h3><p>a. volatile关键字为域变量的访问提供了一种免锁机制</p>
+<p>b. 使用volatile修饰域相当于告诉虚拟机该域可能会被其他线程更新</p>
+<p>c. 因此每次使用该域就要重新计算，而不是使用寄存器中的值</p>
+<p>d. volatile不会提供任何原子操作，它也不能用来修饰final类型的变量</p>
+<p>例如：在上面的例子当中，只需在account前面加上volatile修饰，即可实现线程同步。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//只给出要修改的代码，其余代码与上同</span></span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Bank</span> </span>&#123;</span><br><span class="line">            <span class="comment">//需要同步的变量加上volatile</span></span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> account = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAccount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> account;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//这里不再需要synchronized</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(<span class="keyword">int</span> money)</span> </span>&#123;</span><br><span class="line">                account += money;</span><br><span class="line">            &#125;</span><br><span class="line">        ｝</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、使用重入锁实现线程同步"><a href="#五、使用重入锁实现线程同步" class="headerlink" title="五、使用重入锁实现线程同步"></a>五、使用重入锁实现线程同步</h3><p>在JavaSE5.0中新增了一个java.util.concurrent包来支持同步。</p>
+<p>ReentrantLock类是可重入、互斥、实现了Lock接口的锁，它与使用synchronized方法和快具有相同的基本行为和语义，并且扩展了其能力。</p>
+<p>ReenreantLock类的常用方法有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ReentrantLock() // 创建一个ReentrantLock实例</span><br><span class="line">lock() // 获得锁</span><br><span class="line">unlock() // 释放锁</span><br></pre></td></tr></table></figure>
+
+<p><em>注：ReentrantLock()还有一个可以创建公平锁的构造方法，但由于能大幅度降低程序运行效率，不推荐使用</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//只给出要修改的代码，其余代码与上同</span></span><br><span class="line">        <span class="class"><span class="keyword">class</span> <span class="title">Bank</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">private</span> <span class="keyword">int</span> account = <span class="number">100</span>;</span><br><span class="line">            <span class="comment">//需要声明这个锁</span></span><br><span class="line">            <span class="keyword">private</span> Lock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAccount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> account;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//这里不再需要synchronized</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(<span class="keyword">int</span> money)</span> </span>&#123;</span><br><span class="line">                lock.lock();</span><br><span class="line">                <span class="keyword">try</span>&#123;</span><br><span class="line">                    account += money;</span><br><span class="line">                &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">                    lock.unlock();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        ｝</span><br></pre></td></tr></table></figure>
+
+<p>注：关于Lock对象和synchronized关键字的选择：</p>
+<p>a. 最好两个都不用，使用一种java.util.concurrent包提供的机制，能够帮助用户处理所有与锁相关的代码。</p>
+<p>b. 如果synchronized关键字能满足用户的需求，就用synchronized，因为它能简化代码</p>
+<p>c. 如果需要更高级的功能，就用ReentrantLock类，此时要注意及时释放锁，否则会出现死锁，通常在finally代码释放锁</p>
+<h3 id="六、使用阻塞队列实现线程同步"><a href="#六、使用阻塞队列实现线程同步" class="headerlink" title="六、使用阻塞队列实现线程同步"></a>六、使用阻塞队列实现线程同步</h3><p>前面5种同步方式都是在底层实现的线程同步，但是我们在实际开发当中，应当尽量远离底层结构。 使用javaSE5.0版本中新增的java.util.concurrent包将有助于简化开发。</p>
+<p>本小节主要是使用LinkedBlockingQueue<e>来实现线程的同步 LinkedBlockingQueue<e>是一个基于已连接节点的，范围任意的blocking queue。</e></e></p>
+<p>LinkedBlockingQueue 类常用方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LinkedBlockingQueue() // 创建一个容量为Integer.MAX_VALUE的LinkedBlockingQueue</span><br><span class="line">put(E e) // 在队尾添加一个元素，如果队列满则阻塞</span><br><span class="line">size() // 返回队列中的元素个数</span><br><span class="line">take() // 移除并返回队头元素，如果队列空则阻塞</span><br></pre></td></tr></table></figure>
+
+<p>注：BlockingQueue<e>定义了阻塞队列的常用方法，尤其是三种添加元素的方法，我们要多加注意，当队列满时：</e></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add()方法会抛出异常</span><br><span class="line">offer()方法返回false</span><br><span class="line">put()方法会阻塞</span><br></pre></td></tr></table></figure>
+
+<h3 id="七、使用原子变量实现线程同步"><a href="#七、使用原子变量实现线程同步" class="headerlink" title="七、使用原子变量实现线程同步"></a>七、使用原子变量实现线程同步</h3><p>需要使用线程同步的根本原因在于对普通变量的操作不是原子的。</p>
+<p>那么什么是原子操作呢？原子操作就是指将读取变量值、修改变量值、保存变量值看成一个整体来操作即-这几种行为要么同时完成，要么都不完成。在java的util.concurrent.atomic包中提供了创建了原子类型变量的工具类，使用该类可以简化线程同步。其中AtomicInteger 表可以用原子方式更新int的值，可用在应用程序中(如以原子方式增加的计数器)，但不能用于替换Integer；可扩展Number，允许那些处理机遇数字类的工具和实用工具进行统一访问。</p>
+<p>AtomicInteger类常用方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">AtomicInteger(int initialValue) // 创建具有给定初始值的新的</span><br><span class="line">AtomicIntegeraddAddGet(int dalta) // 以原子方式将给定值与当前值相加</span><br><span class="line">get() // 获取当前值</span><br></pre></td></tr></table></figure>
+
+<p>补充：原子操作主要有：　　</p>
+<ol>
+<li><p>对于引用变量和大多数原始变量(long和double除外)的读写操作；　　</p>
+</li>
+<li><p>对于所有使用volatile修饰的变量(包括long和double)的读写操作。</p>
+</li>
+</ol>
+<p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bank</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AtomicInteger account = <span class="keyword">new</span> AtomicInteger(<span class="number">100</span>);</span><br><span class="line">    <span class="function"><span class="keyword">public</span> AtomicInteger <span class="title">getAccount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> account;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(<span class="keyword">int</span> money)</span> </span>&#123;</span><br><span class="line">        account.addAndGet(money);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        </section>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sirice</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://sirice19.github.io/2019/03/08/java-thread-synchronized/">https://sirice19.github.io/2019/03/08/java-thread-synchronized/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>本文采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享 署名-非商业性使用-禁止演绎(CC BY-NC-ND)国际许可协议</a>进行许可</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tag/java/"># java</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/03/11/java-static-keyword/">Java static关键字</a>
+            
+            
+            <a class="next" rel="next" href="/2019/03/05/pat-BasicLevel-1012/">PAT真题题解乙级1010_1015</a>
+            
+        </section>
+
+
+    </article>
+</div>
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sirice | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Sirice19/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+    </div>
+</body>
+</html>

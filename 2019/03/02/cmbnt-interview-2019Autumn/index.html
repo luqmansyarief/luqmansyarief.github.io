@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<title>招商银行2019秋招后端笔试算法题记录 | Sirice&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sirice&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sirice&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div id="post-toc" class="post-toc">
+            <span class="post-toc-title">catalogue</span>
+            <div class="post-toc-content">
+                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#鸡鸭分类问题"><span class="toc-text">鸡鸭分类问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比特币最佳买卖时机"><span class="toc-text">比特币最佳买卖时机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#爱吃喵粮的小招喵"><span class="toc-text">爱吃喵粮的小招喵</span></a></li></ol>
+            </div>
+        </div>
+    
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">招商银行2019秋招后端笔试算法题记录</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sirice</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">March 2, 2019&nbsp;&nbsp;19:30:24</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/category/Algorithm-Exercises/">Algorithm Exercises</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <section class="post-content">
+            <p><a href="https://www.nowcoder.com/profile/7617669/test/21552802/285161" target="_blank" rel="noopener">招商银行信用卡中心2019秋招IT笔试 题目链接</a></p>
+<h3 id="鸡鸭分类问题"><a href="#鸡鸭分类问题" class="headerlink" title="鸡鸭分类问题"></a><a href="https://www.nowcoder.com/questionTerminal/f87616abbac44842b43f24ddd3cf49e8" target="_blank" rel="noopener">鸡鸭分类问题</a></h3><p>农场有n只鸡鸭排为一个队伍，鸡用“C”表示，鸭用“D”表示。当鸡鸭挨着时会产生矛盾。需要对所排的队伍进行调整，使鸡鸭各在一边。每次调整只能让相邻的鸡和鸭交换位置，现在需要尽快完成队伍调整，你需要计算出最少需要调整多少次可以让上述情况最少。例如：CCDCC-&gt;CCCDC-&gt;CCCCD这样就能使之前的两处鸡鸭相邻变为一处鸡鸭相邻，需要调整队形两次。</p>
+<p>输入描述:</p>
+<blockquote>
+<p>输入一个长度为N，且只包含C和D的非空字符串。</p>
+</blockquote>
+<p>输出描述:</p>
+<blockquote>
+<p>使得最后仅有一对鸡鸭相邻，最少的交换次数</p>
+</blockquote>
+<p>示例1</p>
+<blockquote>
+<p>输入 <br><br>CCDCC <br><br>输出 <br><br>2</p>
+</blockquote>
+<p>解析</p>
+<p>枚举两种最终状态，CDCCC，要么变成DCCCC，要么变成CCCCD；</p>
+<p>对于其中任意一种状态的每一个需要移动的元素，只需要看一下移动的方向上有多少个不一样的元素，然后累加起来就行了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner scanner=<span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        String input=<span class="string">""</span>;</span><br><span class="line">        <span class="keyword">int</span> result=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        input=scanner.nextLine();</span><br><span class="line">        String[] s=input.split(<span class="string">""</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> l=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i].equals(<span class="string">"C"</span>))&#123;</span><br><span class="line">                result+=i-l;</span><br><span class="line">                l++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码仅一个方向排序就ac了。。。实际应该<strong>两次排序取结果最小值</strong>。</p>
+<h3 id="比特币最佳买卖时机"><a href="#比特币最佳买卖时机" class="headerlink" title="比特币最佳买卖时机"></a><a href="https://www.nowcoder.com/questionTerminal/08f70daa78bf45fea64d72523a3641f3" target="_blank" rel="noopener">比特币最佳买卖时机</a></h3><p>给定一个正整数数组，它的第 i 个元素是比特币第 i 天的价格。</p>
+<p>如果你最多只允许完成一笔交易（即买入和卖出一次），设计一个算法来计算你所能获取的最大利润。</p>
+<p>注意你不能在买入比特币前卖出。</p>
+<p>输入描述:</p>
+<blockquote>
+<p>正整数数组，为以空格分隔的n个正整数</p>
+</blockquote>
+<p>输出描述:</p>
+<blockquote>
+<p>最大利润</p>
+</blockquote>
+<p>示例1</p>
+<blockquote>
+<p>输入 <br><br>7 1 5 3 6 4 <br><br>输出 <br><br>5</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*    O(n²)的做法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		<span class="keyword">while</span>(sc.hasNext()) &#123;</span><br><span class="line">			list.add(Integer.parseInt(sc.next()));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span>[] num = <span class="keyword">new</span> <span class="keyword">int</span>[list.size()];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;list.size();i++) &#123;</span><br><span class="line">			num[i] = list.get(i);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; num.length; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span>(num[i]&lt;num[j] &amp;&amp; num[j]-num[i]&gt;max) &#123;</span><br><span class="line">					max = num[j] - num[i];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(max);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里讲一下O(n)的做法。</p>
+<p>对于第i个位置上的元素，我们只需要知道区间[0, i - 1]最小值，就可以得出第二个数的位置为i的最大差值有序偶，枚举i就可以得出答案；而区间[0, i - 1]最小值可以预处理出来。</p>
+<p>因此总体时间复杂度为O(n)</p>
+<p><a href="https://blog.csdn.net/FlushHip/article/details/84137906" target="_blank" rel="noopener">原文链接：招商银行信用卡中心2019秋招IT笔试(AI、开发、测试开发方向)第一批 - FlushHip - CSDN博客</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*    O(n)的做法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		<span class="keyword">while</span>(sc.hasNext()) &#123;</span><br><span class="line">			list.add(Integer.parseInt(sc.next()));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span>[] num = <span class="keyword">new</span> <span class="keyword">int</span>[list.size()];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;list.size();i++) &#123;</span><br><span class="line">			num[i] = list.get(i);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> min = num[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; num.length; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(num[i]-min &gt; max) &#123;</span><br><span class="line">				max = num[i] - min;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(min &gt; num[i]) &#123;</span><br><span class="line">				min = num[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		System.out.println(max);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="爱吃喵粮的小招喵"><a href="#爱吃喵粮的小招喵" class="headerlink" title="爱吃喵粮的小招喵"></a><a href="https://www.nowcoder.com/questionTerminal/336d00e600f8496287d0d472678da774" target="_blank" rel="noopener">爱吃喵粮的小招喵</a></h3><p>小招喵喜欢吃喵粮。这里有 N 堆喵粮，第 i 堆中有 p[i] 粒喵粮。喵主人离开了，将在 H 小时后回来。</p>
+<p>小招喵可以决定她吃喵粮的速度 K （单位：粒/小时）。每个小时，她将会选择一堆喵粮，从中吃掉 K 粒。如果这堆喵粮少于 K 粒，她将吃掉这堆的所有喵粮，然后这一小时内不会再吃更多的喵粮。  </p>
+<p>小招喵喜欢慢慢吃，但仍然想在喵主人回来前吃掉所有的喵粮。</p>
+<p>返回她可以在 H 小时内吃掉所有喵粮的最小速度 K（K 为整数）。</p>
+<p>输入描述:</p>
+<blockquote>
+<p>第一行输入为喵粮数组，以空格分隔的N个整数</p>
+<p>第二行输入为H小时数</p>
+</blockquote>
+<p>输出描述:</p>
+<blockquote>
+<p>最小速度K</p>
+</blockquote>
+<p>示例1</p>
+<blockquote>
+<p>输入 <br><br>3 6 7 11 <br><br>8 <br><br>输出 <br><br>4</p>
+</blockquote>
+<p>解析：<strong>二分解法取下界</strong> O(logn)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        ArrayList&lt;Integer&gt; food=<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span>(in.hasNextInt())&#123;</span><br><span class="line">            food.add(in.nextInt());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> num=food.size()-<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//注意此处ArrayList转换为Integer[]的写法</span></span><br><span class="line">        Integer[] fo=food.toArray(<span class="keyword">new</span> Integer[food.size()]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> planTime=fo[fo.length-<span class="number">1</span>];</span><br><span class="line">        in.close();</span><br><span class="line">        <span class="keyword">int</span> realTime=planTime+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> speed;</span><br><span class="line">        <span class="keyword">for</span>(speed=<span class="number">1</span>;realTime&gt;planTime;speed++)&#123;</span><br><span class="line">            realTime=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>((fo[i]%speed)!=<span class="number">0</span>&amp;&amp;fo[i]&gt;speed)&#123;</span><br><span class="line">                    realTime+=fo[i]/speed+<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(fo[i]&lt;speed)</span><br><span class="line">                    realTime++;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    realTime+=fo[i]/speed;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(--speed);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>吐槽：第二题一发AC的感觉真爽</em></p>
+
+        </section>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sirice</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://sirice19.github.io/2019/03/02/cmbnt-interview-2019Autumn/">https://sirice19.github.io/2019/03/02/cmbnt-interview-2019Autumn/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>本文采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享 署名-非商业性使用-禁止演绎(CC BY-NC-ND)国际许可协议</a>进行许可</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tag/algorithm/"># algorithm</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/03/03/pat-BasicLevel-1006-1010/">PAT真题题解乙级1006-1010</a>
+            
+            
+            <a class="next" rel="next" href="/2019/02/26/blog-fixedFunctions/">hexo博客如何添加二级分档和标签云</a>
+            
+        </section>
+
+
+    </article>
+</div>
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sirice | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Sirice19/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+    </div>
+</body>
+</html>
