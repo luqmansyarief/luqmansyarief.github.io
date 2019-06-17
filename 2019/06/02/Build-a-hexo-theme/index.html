@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<title>从零开始创建一个hexo主题 | Sirice&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sirice&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sirice&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div id="post-toc" class="post-toc">
+            <span class="post-toc-title">catalogue</span>
+            <div class="post-toc-content">
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#构建目录结构"><span class="toc-text">构建目录结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原理"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#页面设计"><span class="toc-text">页面设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#布局"><span class="toc-text">布局</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#页面框架"><span class="toc-text">页面框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Head"><span class="toc-text">Head</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Header"><span class="toc-text">Header</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Footer"><span class="toc-text">Footer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Content"><span class="toc-text">Content</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置文件"><span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#样式"><span class="toc-text">样式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础样式"><span class="toc-text">基础样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文章样式"><span class="toc-text">文章样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图标"><span class="toc-text">图标</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#脚本"><span class="toc-text">脚本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#子目录路径"><span class="toc-text">子目录路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#国际化"><span class="toc-text">国际化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#移动端适配"><span class="toc-text">移动端适配</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-text">参考链接</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第三方库"><span class="toc-text">第三方库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-text">参考文章</span></a></li></ol></li></ol>
+            </div>
+        </div>
+    
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">从零开始创建一个hexo主题</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sirice</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 2, 2019&nbsp;&nbsp;14:19:49</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <section class="post-content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将从零开始记录一个hexo主题的开发过程，目前使用过的主题从设计感或者功能上或多或少都有问题，因此不如借此机会尝试一下hexo主题的编写。我目前已经完成了<a href="https://github.com/Sirice19/hexo-theme-Chic" target="_blank" rel="noopener">Chic主题</a>的编写，在写下这篇文章时已经提交pull request。本文将记录编写主题过程中的各个环节，欢迎阅读本文的同学自己动手创建属于自己的专属主题。</p>
+<p>编写主题前需要了解的一些预备知识：</p>
+<ul>
+<li>前端开发基础。了解HTML CSS JavaScript和NPM。</li>
+<li>模板引擎语法，hexo内置ejs–<a href="https://ejs.bootcss.com" target="_blank" rel="noopener">ejs文档</a>；swig，Haml，Jade等自行加插件支持</li>
+<li>CSS预处理器，hexo内置stylus–<a href="http://stylus-lang.com" target="_blank" rel="noopener">stylus文档</a> ; SASS，LESS等自行加插件支持</li>
+<li>YAML语法（用于config文件语法格式）</li>
+<li>Hexo官方文档<ul>
+<li><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">中文文档</a></li>
+<li><a href="https://hexo.io/docs/index.html" target="_blank" rel="noopener">英文文档（推荐，有数据类型表）</a></li>
+</ul>
+</li>
+</ul>
+<p>Chic主题使用的是Stylus + Ejs，本文将在这两个库基础上进行编写。</p>
+<h1 id="构建目录结构"><a href="#构建目录结构" class="headerlink" title="构建目录结构"></a>构建目录结构</h1><p>根据官方文档的说法，在<code>theme</code>文件夹中创建任意名称（其实是主题名称）的文件夹，即为主题文件夹，一般包含以下目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml # 主题配置文件</span><br><span class="line">├── languages # 国际化语言</span><br><span class="line">├── layout # 页面模板</span><br><span class="line">├── scripts # 脚本</span><br><span class="line">└── source # 资源文件夹</span><br></pre></td></tr></table></figure>
+
+<p>具体解释在官方文档中有说明。<a href="https://hexo.io/zh-cn/docs/themes" target="_blank" rel="noopener">主题 | Hexo</a></p>
+<p><strong>这部分也可以使用<a href="https://github.com/tcrowe/generator-hexo-theme" target="_blank" rel="noopener">generator-hexo-theme</a>主题生成器生成一个基本目录结构。</strong></p>
+<p>这里特别需要注意的是：</p>
+<ul>
+<li><p>scripts 脚本文件夹。在启动时，Hexo 会载入此文件夹内的 JavaScript 文件。</p>
+<p><em>script是指hexo的插件，在hexo命令运行时加载，页面插件请加入source/js下</em>。</p>
+</li>
+<li><p>source 资源文件夹，除了模板以外的 Asset，例如 CSS、JavaScript 文件等，都应该放在这个文件夹中。文件或文件夹开头名称为 <code>_</code>（下划线）或隐藏的文件会被忽略。如果文件可以被渲染的话，会经过解析然后储存到 public 文件夹，否则会直接拷贝到 public 文件夹。</p>
+</li>
+</ul>
+<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><p>hexo使用的ejs模板是组件化开发的思路，使静态资源markdown文件根据source目录中的页面模板结构结合config中变量动态渲染出静态html页面。</p>
+<p>这里如果有组件化前端开发经验的话这里会比较好理解，简单的说就是hexo开发不是点击链接切换一个页面，而是刷新并替换局部的模板，我们根据页面元素划分出一些页面部件进行替换即可。</p>
+<p><strong>页面结构</strong> 是以ejs语法为基础声明，开发时使用<code>hexo s</code>命令，hexo会自动渲染ejs文件并支持热更新。此处注意调用的主题config是支持热更新的，但全局config不支持热更新，更改全局config需要重启hexo服务器。</p>
+<p><strong>页面样式</strong> 推荐使用CSS预处理器，当然原生CSS也可以，这点没有什么区别，但css预处理器支持根据组件划分样式表，继承元素样式会节省很多重复代码。hexo默认支持stylus预处理器，sass、less等需要额外添加依赖。同样开发过程中hexo的样式也支持热更新。</p>
+<h1 id="页面设计"><a href="#页面设计" class="headerlink" title="页面设计"></a>页面设计</h1><p>想自己写主题的理由就是hexo中主题大部分没有封面，个人觉得博客作为个人主页需要一个封面来引入内容。有封面的主题如我用过的typing、fexo都很不错，typing主题的markdown渲染样式很适合中文但不太适合代码；fexo有点过于简单。而基于go语言的hugo生成器的社区主题的设计感就好很多。本文参考hugo的部分主题设计编写一个hexo主题，使其达到简洁同时典雅大方，阅读体验良好。</p>
+<p>Chic主题完成了这样的任务，我制作了封面作为home page，有头像、昵称、简介、外部链接等，同时参考hugo部分主题设计了两套样式，一键切换light/dark模式。</p>
+<p>文章阅读样式需要考虑易读性、清晰性。我结合读过的版式设计的书籍给出的设计方案是这样：</p>
+<ul>
+<li><p>文章页面以一种淡色为主题色，结合大部分浏览器黑底白字营造出双色阅读的体验；</p>
+</li>
+<li><p>常用四级标题分别加入前缀区分结构；</p>
+</li>
+<li><p>行高设为字符大小2倍可以使行间距更加清晰；</p>
+</li>
+<li><p>代码高亮方案可更换；</p>
+</li>
+<li><p>中英文混合排版，本来有<a href="https://typo.sofi.sh" target="_blank" rel="noopener">typo.css</a>这个中英文混编样式库，但它的字体太纤细了感觉还是不舒服，后更改字体方案，中文字符以Microsoft Jhenghei, Lantinghei SC （微软正黑、方正兰亭）为主要方案，针对苹果显示器使用苹方字体；西文字体选用非衬线体，这样混合排版不会突兀也不会交错，长时间阅读会产生沉浸感且不累眼睛。</p>
+</li>
+</ul>
+<p><img src="https://i.loli.net/2019/06/16/5d0632bff213a22169.png" alt="origin.png"></p>
+<center>原始设计稿</center>
+
+<p><img src="https://i.loli.net/2019/06/12/5d006bd289aa325037.png" alt="production.png"></p>
+<center>完成稿</center>
+
+<p><img src="https://i.loli.net/2019/06/12/5d00a0856063661133.png" alt="article.png"></p>
+<center>文章样式</center>
+
+<h1 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h1><p>本主题采用三栏布局，即header、body、footer组成，三部分组件分别开发并以局部模板的形式塞到页面中。</p>
+<p>这里会用到的重要函数：</p>
+<ul>
+<li><p><code>partial()</code>函数用于导入一个模块，有点类似ES6的import函数。就是将一个页面模板导入进来。</p>
+<p>  partial函数的第二个参数为Object类型，用于父子组件的值传递和参数格式化，具体参考实际代码和文档。（文档中并没有示例代码，这里推荐看已有的主题代码实例，比如landscape）</p>
+</li>
+<li><p><code>&lt;%- %&gt;</code>为Ejs一个标记，输出非转义的数据到模板。具体参考ejs文档。</p>
+</li>
+</ul>
+<h2 id="页面框架"><a href="#页面框架" class="headerlink" title="页面框架"></a>页面框架</h2><p>Hexo博客首先根据<code>themes/mytheme/layout/layout.ejs</code>进行最初的渲染，后续所有结构都是在这个文件中替换形成的。示例代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">layout/layout.ejs</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"&lt;%= theme.language %&gt;"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--  head  --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">%-</span> <span class="attr">partial</span>('<span class="attr">_partial</span>/<span class="attr">head</span>') %&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--  header  --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">%-</span> <span class="attr">partial</span>('<span class="attr">_partial</span>/<span class="attr">header</span>') %&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--  index.ejs  --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">%-</span> <span class="attr">body</span> %&gt;</span></span><br><span class="line">            <span class="comment">&lt;!--  footer  --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">%-</span> <span class="attr">partial</span>('<span class="attr">_partial</span>/<span class="attr">footer</span>') %&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Head"><a href="#Head" class="headerlink" title="Head"></a>Head</h2><p>然后是局部模板替换，<code>themes/mytheme/layout/_partial/head.ejs</code>为head中需要声明的html页面头等信息</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">layout/_partial/head.ejs</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">content</span>=<span class="string">"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h2><p><code>themes/mytheme/layout/_partial/header.ejs</code>为header替换模板</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">layout/_partial/header.ejs</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">header</span> <span class="attr">id</span>=<span class="string">"header"</span> <span class="attr">class</span>=<span class="string">"header"</span>&gt;</span></span><br><span class="line">    header</span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Footer"><a href="#Footer" class="headerlink" title="Footer"></a>Footer</h2><p><code>themes/mytheme/layout/_partial/footer.ejs</code>为footer替换模板</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">layout/_partial/footer.ejs</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">footer</span> <span class="attr">id</span>=<span class="string">"footer"</span> <span class="attr">class</span>=<span class="string">"footer"</span>&gt;</span></span><br><span class="line">    footer</span><br><span class="line"><span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Content"><a href="#Content" class="headerlink" title="Content"></a>Content</h2><p>body模板自动加载同目录下的index.ejs，该模板将作为首页的页面模板。当网页跳转到category、tag页面会替换载入同级目录下的同名ejs文件形成网页。<a href="https://hexo.io/zh-cn/docs/templates" target="_blank" rel="noopener">官方文档说明点这里</a></p>
+<p><code>themes/mytheme/layout/index.ejs</code>示例代码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">layout/index.ejs</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>body!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此时运行<code>hexo s</code>效果：</p>
+<p><img src="data:image/png;base64,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" alt="效果图"></p>
+<p>到这里页面布局就完成了。</p>
+<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p>完成了页面框架结构的创建，就可以针对每个部分进行单独开发了，为了使页面中元素可以定制化，我们采用配置文件，也就是将需要引入的部分变量化，灵活的控制页面显示元素。这个文件就是theme目录下的<code>_config.yml</code>文件。</p>
+<p>举例来说这个变量怎么使用：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">themes/Chic/layout/_partial/header.ejs</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">"navbar"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"navbar-header header-logo"</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&lt;%- config.root %&gt;"</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">theme.navname</span> %&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"menu navbar-right"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">%</span> <span class="attr">for</span> (<span class="attr">var</span> <span class="attr">i</span> <span class="attr">in</span> <span class="attr">theme.nav</span>)&#123; %&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">"menu-item"</span> <span class="attr">href</span>=<span class="string">"&lt;%- url_for(theme.nav[i]) %&gt;"</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">i</span> %&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"switch_default"</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">class</span>=<span class="string">"switch_default"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"switch_default"</span> <span class="attr">class</span>=<span class="string">"toggleBtn"</span>&gt;</span><span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这是header组件，<code>theme.nav</code>是一个list结构，对这个变量枚举即可。</p>
+<p>也就是说访问变量时，<code>theme.obj</code>是访问主题变量，<code>page.obj</code>是页面变量，<code>site.obj</code>为全局变量。</p>
+<p>变量参数表可以看<a href="https://hexo.io/zh-cn/docs/variables" target="_blank" rel="noopener">hexo文档 - 变量</a></p>
+<h1 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h1><h2 id="基础样式"><a href="#基础样式" class="headerlink" title="基础样式"></a>基础样式</h2><p>页面写到这里已经有了结构层，现在需要加入样式层。</p>
+<p>在<code>themes\[themeName]\source\css</code>中编写stylus文件，这里写原生css也是可以的，但为了编写的简便性和便于组织代码，推荐使用预处理器完成。</p>
+<p>hexo系统自带stylus预编译器，编译后会在<code>public\css</code>文件夹内生成静态css。因此在head组件内引入这个样式资源。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;%# css list %&gt;</span><br><span class="line"></span><br><span class="line">&lt;% <span class="keyword">if</span> (theme.stylesheets !== <span class="literal">undefined</span> &amp;&amp; theme.stylesheets.length &gt; <span class="number">0</span>) &#123; %&gt;</span><br><span class="line">    &lt;!-- stylesheets list <span class="keyword">from</span> _config.yml --&gt;</span><br><span class="line">    &lt;% theme.stylesheets.forEach(<span class="function"><span class="params">url</span> =&gt;</span> &#123; %&gt;</span><br><span class="line">    &lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"&lt;%- url_for(url) %&gt;"</span>&gt;</span><br><span class="line">    &lt;% &#125;); %&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure>
+
+<p>我的写法是将要包含的css写在config中根据这个列表引入页面。</p>
+<p><code>themes\[themeName]\source\css</code>中建立style.styl文件，这个文件作为所有stylus的入口，最后编译完成会只有一个style.css文件。</p>
+<p>stylus的语法、变量、辅助函数等在这里不做过多介绍，直接看文档即可。stylus支持css与styl并存，可以将css引入styl中来，因此也可以使用第三方css库  如bootstrap等。</p>
+<p>此处注意，style.styl导入的css是有前后顺序的，后面的样式在同样选择器下会覆盖前面的，因此基础样式如normalize、cssReset等需要先引入。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// style.styl文件</span></span><br><span class="line"><span class="comment">// variable &amp; init style</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"variable.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"normalize.styl"</span></span><br><span class="line"><span class="comment">// font</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"font.styl"</span></span><br><span class="line"><span class="comment">// structure style</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"base.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"layout.styl"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// toggle button</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_lib/looper.css"</span></span><br><span class="line"><span class="comment">// icon</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"../fonts/iconfont/iconfont.css"</span></span><br><span class="line"><span class="comment">// partial</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_partial/header.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_partial/footer.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_partial/paginator.styl"</span></span><br><span class="line"><span class="comment">// page</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_page/profile.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_page/archive.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_page/category.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_page/tag.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_page/page.styl"</span></span><br><span class="line"><span class="comment">// page post</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_page/_post/post_header.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_page/_post/post_content.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_page/_post/post_copyright.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_page/_post/post_code.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_page/_post/post_tags.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_page/_post/post_nav.styl"</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_page/_post/post_toc.styl"</span></span><br><span class="line"><span class="comment">//mobile</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"media.styl"</span></span><br><span class="line"><span class="comment">// highlight</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"_highlight/solarized-light.styl"</span></span><br><span class="line"><span class="comment">//@import "_highlight/solarized-dark.styl"</span></span><br><span class="line"><span class="comment">//// ==============================</span></span><br><span class="line"><span class="comment">//// Custom style</span></span><br><span class="line"><span class="comment">//// ==============================</span></span><br><span class="line"><span class="comment">//// You can override the variables in variable.styl to customize the style</span></span><br><span class="line">@<span class="keyword">import</span> <span class="string">"custom.styl"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="文章样式"><a href="#文章样式" class="headerlink" title="文章样式"></a>文章样式</h2><p>文章样式为Hexo对Markdown转换成的HTML结构的样式，例如markdown标签<code>###</code>会渲染为<code>&lt;h3&gt;</code></p>
+<p>合适的文章样式会更加适合屏幕显示与阅读。这里推荐的方法为看下其他主题中文章样式，对其可取部分进行保留。</p>
+<p><em>个人觉得在这点上Hugo主题普遍比Hexo主题的阅读体验要好，因此可以参考下Hugo主题的样式。</em></p>
+<h2 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h2><p>图标推荐的方式是css结合font字体，个人不推荐雪碧图等图片方案。</p>
+<ul>
+<li><p><a href="https://fontawesome.com/" target="_blank" rel="noopener">Font Awesome</a> （中文点这里<a href="http://www.fontawesome.com.cn/" target="_blank" rel="noopener">Font Awesome 中文网 – | 字体图标</a>）有名的图标字体库，问题就是有点太大了，而且一个主题也用不上这么多图标…</p>
+</li>
+<li><p>【推荐】<a href="https://www.iconfont.cn/" target="_blank" rel="noopener">Iconfont-阿里巴巴矢量图标库</a> 这个库可以在线制作自己需要的图标，没有font awesome那么丰富但基本够用。</p>
+</li>
+</ul>
+<p>推荐的方式是以i class引入，相比Unicode形式更加语义化且方便维护。</p>
+<h1 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h1><p>开发Chic主题时遇到了<code>document.body.classList</code>出现 “Cannot read property ‘classList’ of null 错误。</p>
+<p>这个错误很奇怪，因为明明DOM上有了body，为什么会undefined呢？</p>
+<p>后来明白了是<strong>页面加载顺序</strong>的原因。</p>
+<p>我写的绑定body元素的函数为匿名函数，JavaScript的加载和html构建DOM树在V8中为多线程进行，因此在执行匿名函数时页面DOM加载还未完成，这时body元素还未显示到文档中，因此body空指针。</p>
+<p>所以提醒需要写脚本的主题开发者注意下这个问题，初学者可以引入<a href="http://jquery.com/" target="_blank" rel="noopener">JQuery</a>直接调用<code>$.ready()</code>函数来完成在页面中需要的脚本。</p>
+<h1 id="子目录路径"><a href="#子目录路径" class="headerlink" title="子目录路径"></a>子目录路径</h1><p>这部分是解决在某个子目录下部署hexo的路径问题。</p>
+<p>全局配置有这么个参数：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment"># If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span></span><br><span class="line"><span class="attr">url:</span> <span class="attr">https://yoursite.com</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你的主题的外部资源（图片、图标等）是以相对目录形式引入的，例如图标</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 有问题的写法 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">href</span>=<span class="string">"&lt;%- theme.favicon %&gt;"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这种写法在根目录下部署不会有问题，但如果<code>root</code>不是根目录<code>&#39;/&#39;</code>而是一个子目录，你的外部资源就会404 file not found.也正是这个原因需要用到hexo中的辅助函数<code>url_for()</code>补全路径。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 正确的写法 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">href</span>=<span class="string">"&lt;%- url_for(theme.favicon) %&gt;"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样就可以在子目录中也能正确的识别资源url了。我的预览站就是这样，可以参考<a href="https://sirice19.github.io/hexo-theme-Chic/">https://sirice19.github.io/hexo-theme-Chic/</a></p>
+<h1 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h1><p>还记得我们一开始创建的<code>languages</code>文件夹吗？没错，它是用来添加多种语言，用于 i18n 的。站点的语言设置为站点配置文件中的language。</p>
+<p>当该字段为空时，默认使用的是 <code>languages/default.yml</code> 这个文件。那么现在我们来添加这个文件，我们决定主题的默认语言是英文：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Menu:</span></span><br><span class="line"><span class="attr">  Home:</span> <span class="string">Home</span></span><br><span class="line"><span class="attr">  Archives:</span> <span class="string">Archives</span></span><br><span class="line"><span class="attr">  Github:</span> <span class="string">Github</span></span><br></pre></td></tr></table></figure>
+
+<p>然后就需要更改组件中的变量语言。此处以header举例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span> <span class="attr">class</span>=<span class="string">"header"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"blog-title"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&lt;%- url_for() %&gt;"</span> <span class="attr">class</span>=<span class="string">"logo"</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">config.title</span> %&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">"navbar"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"menu"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">%</span> <span class="attr">for</span> (<span class="attr">name</span> <span class="attr">in</span> <span class="attr">theme.menu</span>) &#123; %&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"menu-item"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&lt;%- url_for(theme.menu[name]) %&gt;"</span> <span class="attr">class</span>=<span class="string">"menu-item-link"</span>&gt;</span><span class="tag">&lt;<span class="name">%-</span> <span class="attr">__</span>('<span class="attr">Menu.</span>' + <span class="attr">name</span>) %&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>中文语言的配置为</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Menu:</span></span><br><span class="line"><span class="attr">  Home:</span> <span class="string">首页</span></span><br><span class="line"><span class="attr">  Archives:</span> <span class="string">归档</span></span><br><span class="line"><span class="attr">  Github:</span> <span class="string">代码托管</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在全局配置中（config文件）更改language值</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language:</span> <span class="string">en</span></span><br></pre></td></tr></table></figure>
+
+<p>即可达到切换语言的效果。其他语言即为更改该值为<code>languages</code>文件夹中的语言YAML文件名。</p>
+<h1 id="移动端适配"><a href="#移动端适配" class="headerlink" title="移动端适配"></a>移动端适配</h1><p>网站的全端适配主流做法都是媒体查询，缺点就是需要针对不同设备编写很多套css文件。</p>
+<p>所以推荐的写法为PC等大屏使用flex弹性布局进行宽度自适应，移动端使用媒体查询根据页面宽度进行切换样式方案。</p>
+<p>给出Chic主题中的媒体查询三种屏幕尺寸方案做举例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// themes\Chic\source\css\media.styl</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Mobile  */</span></span><br><span class="line">@<span class="keyword">media</span> only screen and (min-device-width: <span class="number">320px</span>) and (max-device-width: <span class="number">480px</span>)</span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">/* iPads (portrait and landscape)  */</span><br><span class="line"></span><br><span class="line">@media only screen and (min-device-width: <span class="number">768px</span>)</span><br><span class="line">  .navbar-mobile</span><br><span class="line">    display none</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/* Desktops and laptops  */</span><br><span class="line"></span><br><span class="line">@media only screen and (min-width: <span class="number">1024px</span>)</span><br><span class="line">  .navbar-mobile</span><br><span class="line">    display none</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>刚接触Hexo主题编写的时候还一头雾水，写完了发现也就这么回事，看懂了渲染过程之后针对页面模板进行结构和样式的编写就简单了许多。Hexo 就是把那些 Markdown 文件按照不同的布局模板，填上对应的数据生成 HTML 页面，复制 <code>source</code> 中的到生成的 <code>public</code> 文件夹中，中间过程会把需要编译的 stylus/less/sass 等文件编译。</p>
+<p>本文并没有对页面编写的细节做过多介绍，这部分就按自己的设计思路去编写就可以了。</p>
+<p>最后在主题发布之前可以考虑使用gulp、grunt等自动化构建工具压缩下代码，使资源的加载速度能提升一些。</p>
+<p>感谢阅读，希望对主题编写的你有所帮助，感受开发hexo主题的快乐。</p>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><h2 id="第三方库"><a href="#第三方库" class="headerlink" title="第三方库"></a>第三方库</h2><p>中英文混编排版库 <a href="https://typo.sofi.sh/" target="_blank" rel="noopener">Typo.css - 中文网页重设与排版</a></p>
+<p>样式初始化 <a href="https://github.com/bymathias/normalize.styl" target="_blank" rel="noopener">Stylus version of normalize.css</a></p>
+<p>代码高亮 <a href="https://highlightjs.org/" target="_blank" rel="noopener">highlight.js</a></p>
+<p>Toggle样式 <a href="https://tfzh.github.io/looper-ui/" target="_blank" rel="noopener">Looper UI 轻量级响应式前端框架</a></p>
+<p>作品展示效果图 <a href="https://www.screely.com/" target="_blank" rel="noopener">Screely - Generate Beautiful Mockups</a></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="https://www.ahonn.me/posts/2016121533" target="_blank" rel="noopener">从零开始制作 Hexo 主题 - Ahonn’s Blog</a></p>
+<p><a href="http://www.codeblocq.com/2016/03/Create-an-Hexo-Theme-Part-1-Index/" target="_blank" rel="noopener">Create an Hexo Theme - Part 1: Index - CodeBlocQ</a></p>
+<p><a href="https://juejin.im/entry/59ba97216fb9a00a6b6e50bf" target="_blank" rel="noopener">Hexo主题开发经验杂谈 - 前端 - 掘金</a></p>
+<p><a href="https://segmentfault.com/a/1190000002712872" target="_blank" rel="noopener">stylus入门使用方法 - 小弟调调 - SegmentFault 思否</a></p>
+<p><a href="https://www.jianshu.com/p/4b9ee8fec3a3" target="_blank" rel="noopener">搭建Hexo博客进阶篇—主题自定义（三） - 简书</a></p>
+
+        </section>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sirice</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://sirice19.github.io/2019/06/02/Build-a-hexo-theme/">https://sirice19.github.io/2019/06/02/Build-a-hexo-theme/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>本文采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享 署名-非商业性使用-禁止演绎(CC BY-NC-ND)国际许可协议</a>进行许可</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tag/FrontEnd/"># FrontEnd</a>
+                    
+                        <a href="/tag/hexo/"># hexo</a>
+                    
+                        <a href="/tag/Chic/"># Chic</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/06/04/guide-course-day1/">DAY1-导游执业规划和能力提升-笔记</a>
+            
+            
+            <a class="next" rel="next" href="/2019/04/22/Review-The-world-between-us/">《我们与恶的距离》影评</a>
+            
+        </section>
+
+
+    </article>
+</div>
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sirice | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Sirice19/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+    </div>
+</body>
+</html>
