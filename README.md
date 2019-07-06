@@ -1,9 +1,9 @@
 ## Sirice's Blog
 Welcome to my blog!
 
-Please click [https://sirice19.github.io/](https://sirice19.github.io/) to enter the site.
+Please click [https://siricee.github.io/](https://siricee.github.io/) to enter the site.
 
-Powered by [Hexo](https://hexo.io/) Theme [Chic](https://github.com/Sirice19/hexo-theme-Chic) designed by Sirice.
+Powered by [Hexo](https://hexo.io/) Theme [Chic](https://github.com/Siricee/hexo-theme-Chic) designed by Sirice.
 
 <hr>
 
