@@ -31,8 +31,15 @@
     
     <script src="/js/script.js"></script>
     
+    <script src="/js/tocbot.min.js"></script>
+    
 
 
+
+    
+    
+        
+    
 
 
 </head>
@@ -100,13 +107,69 @@
             <div class="container">
     
     
-        <div id="post-toc" class="post-toc">
-            <span class="post-toc-title">catalogue</span>
-            <div class="post-toc-content">
-                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#观感和话题简述"><span class="toc-text">观感和话题简述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#随机杀人案的死刑裁决·人权还是民意？"><span class="toc-text">随机杀人案的死刑裁决·人权还是民意？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新闻媒体的社会责任·表面还是深入？"><span class="toc-text">新闻媒体的社会责任·表面还是深入？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#精神病患者的权利·个人还是不正常的群体？"><span class="toc-text">精神病患者的权利·个人还是不正常的群体？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原生家庭教育·你为什么会认为你是对的？"><span class="toc-text">原生家庭教育·你为什么会认为你是对的？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他话题"><span class="toc-text">其他话题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#我们与恶的距离"><span class="toc-text">我们与恶的距离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后记"><span class="toc-text">后记</span></a></li></ol>
-            </div>
-        </div>
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
+
     
     <article class="post-wrap">
         <header class="post-header">
@@ -134,7 +197,7 @@
             
         </header>
 
-        <section class="post-content">
+        <div class="post-content">
             <p>《我们与恶的距离》这个台剧最近看的非常入迷，难得有个感兴趣的题材影视剧，写一写影评和我自己对于部分内容的感想。</p>
 <blockquote>
 <p>2016年3月28日上午在台北市，一个4岁的小女孩，乱刀之下，身首异处。她没有仇人，也没冒犯谁，原因只有一个——凶手随机杀人。小女孩的妈妈，做出了异于常人的举动。她不希望杀死凶手，而是想了解这个人，为什么一步步变成凶手，他经历了什么，他怎么想的……这些，不能让女儿起死回生，但是能为预防出一份力，能拯救其他孩子。</p>
@@ -199,7 +262,7 @@
 <p>这个剧真的十分精彩，他没给标准答案却把问题递给了观众。我觉得这种能引发人思考的剧才是有看点的，直接给标准答案的，不是宗教就是政治。</p>
 <p>希望大陆也能有朝一日拍出观念灵活点的电视剧吧。</p>
 
-        </section>
+        </div>
 
         
             <section class="post-copyright">

@@ -31,8 +31,15 @@
     
     <script src="/js/script.js"></script>
     
+    <script src="/js/tocbot.min.js"></script>
+    
 
 
+
+    
+    
+        
+    
 
 
 </head>
@@ -100,13 +107,69 @@
             <div class="container">
     
     
-        <div id="post-toc" class="post-toc">
-            <span class="post-toc-title">catalogue</span>
-            <div class="post-toc-content">
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#构建目录结构"><span class="toc-text">构建目录结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#原理"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#页面设计"><span class="toc-text">页面设计</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#布局"><span class="toc-text">布局</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#页面框架"><span class="toc-text">页面框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Head"><span class="toc-text">Head</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Header"><span class="toc-text">Header</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Footer"><span class="toc-text">Footer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Content"><span class="toc-text">Content</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置文件"><span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#样式"><span class="toc-text">样式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础样式"><span class="toc-text">基础样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文章样式"><span class="toc-text">文章样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图标"><span class="toc-text">图标</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#脚本"><span class="toc-text">脚本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#子目录路径"><span class="toc-text">子目录路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#国际化"><span class="toc-text">国际化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#移动端适配"><span class="toc-text">移动端适配</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考链接"><span class="toc-text">参考链接</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第三方库"><span class="toc-text">第三方库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-text">参考文章</span></a></li></ol></li></ol>
-            </div>
-        </div>
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
+
     
     <article class="post-wrap">
         <header class="post-header">
@@ -127,7 +190,7 @@
             
         </header>
 
-        <section class="post-content">
+        <div class="post-content">
             <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文将从零开始记录一个hexo主题的开发过程，目前使用过的主题从设计感或者功能上或多或少都有问题，因此不如借此机会尝试一下hexo主题的编写。我目前已经完成了<a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank" rel="noopener">Chic主题</a>的编写，在写下这篇文章时已经提交pull request。本文将记录编写主题过程中的各个环节，欢迎阅读本文的同学自己动手创建属于自己的专属主题。</p>
 <p><em>2019.6.25更新：主题已经发布到hexo theme list啦！<a href="https://hexo.io/themes/" target="_blank" rel="noopener">点击查看</a></em></p>
 <p>编写主题前需要了解的一些预备知识：</p>
@@ -291,7 +354,7 @@
 <p><a href="https://segmentfault.com/a/1190000002712872" target="_blank" rel="noopener">stylus入门使用方法 - 小弟调调 - SegmentFault 思否</a></p>
 <p><a href="https://www.jianshu.com/p/4b9ee8fec3a3" target="_blank" rel="noopener">搭建Hexo博客进阶篇—主题自定义（三） - 简书</a></p>
 
-        </section>
+        </div>
 
         
             <section class="post-copyright">
@@ -323,9 +386,9 @@
                 <span class="tag">
                     
                     
-                        <a href="/tag/hexo/"># hexo</a>
-                    
                         <a href="/tag/FrontEnd/"># FrontEnd</a>
+                    
+                        <a href="/tag/hexo/"># hexo</a>
                     
                         <a href="/tag/Chic/"># Chic</a>
                     

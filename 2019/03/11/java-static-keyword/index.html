@@ -31,8 +31,15 @@
     
     <script src="/js/script.js"></script>
     
+    <script src="/js/tocbot.min.js"></script>
+    
 
 
+
+    
+    
+        
+    
 
 
 </head>
@@ -100,13 +107,69 @@
             <div class="container">
     
     
-        <div id="post-toc" class="post-toc">
-            <span class="post-toc-title">catalogue</span>
-            <div class="post-toc-content">
-                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#static修饰方法"><span class="toc-text">static修饰方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static修饰成员变量"><span class="toc-text">static修饰成员变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static静态导包"><span class="toc-text">static静态导包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static修饰代码块"><span class="toc-text">static修饰代码块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static修饰之后的内存分布"><span class="toc-text">static修饰之后的内存分布</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li></ol>
-            </div>
-        </div>
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
+
     
     <article class="post-wrap">
         <header class="post-header">
@@ -127,7 +190,7 @@
             
         </header>
 
-        <section class="post-content">
+        <div class="post-content">
             <p>最近几场面试中都问到了static关键字用法，在此添加一篇总结。</p>
 <p>在《Java编程思想》P86页有这样一段话：</p>
 <blockquote>
@@ -195,7 +258,7 @@
 <li>静态导包用法，将类的方法直接导入到当前类中，从而直接使用“方法名”即可调用类方法，更加方便。</li>
 </ol>
 
-        </section>
+        </div>
 
         
             <section class="post-copyright">

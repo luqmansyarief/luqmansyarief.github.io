@@ -31,8 +31,15 @@
     
     <script src="/js/script.js"></script>
     
+    <script src="/js/tocbot.min.js"></script>
+    
 
 
+
+    
+    
+        
+    
 
 
 </head>
@@ -100,13 +107,69 @@
             <div class="container">
     
     
-        <div id="post-toc" class="post-toc">
-            <span class="post-toc-title">catalogue</span>
-            <div class="post-toc-content">
-                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#执行环境、工具"><span class="toc-text">执行环境、工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#运行方法"><span class="toc-text">运行方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#机器学习的主要过程"><span class="toc-text">机器学习的主要过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#机器学习的-Hello-World"><span class="toc-text">机器学习的 Hello World</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-检测环境、导入数据包"><span class="toc-text">1. 检测环境、导入数据包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-导入数据集"><span class="toc-text">2. 导入数据集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-总结数据集"><span class="toc-text">3. 总结数据集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据集维度"><span class="toc-text">数据集维度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#详细查看数据"><span class="toc-text">详细查看数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#统计摘要"><span class="toc-text">统计摘要</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-数据可视化"><span class="toc-text">4. 数据可视化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#单变量图形"><span class="toc-text">单变量图形</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#多变量图形"><span class="toc-text">多变量图形</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-评估算法"><span class="toc-text">5. 评估算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建验证集"><span class="toc-text">创建验证集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#测试工具"><span class="toc-text">测试工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#搭建模型"><span class="toc-text">搭建模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#选择最佳模型"><span class="toc-text">选择最佳模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-做出预测"><span class="toc-text">6. 做出预测</span></a></li></ol></li></ol>
-            </div>
-        </div>
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
+
     
     <article class="post-wrap">
         <header class="post-header">
@@ -134,7 +197,7 @@
             
         </header>
 
-        <section class="post-content">
+        <div class="post-content">
             <blockquote>
 <p>数据科学机器学习是我大三立志读研的研究方向，虽然今年初战失败了但这个执念始终无法放下。在成绩发表之际写下这一篇博文入门提醒自己不忘初心，调剂失败的话明年再来。</p>
 </blockquote>
@@ -276,7 +339,7 @@
 <p><a href="https://segmentfault.com/a/1190000017067753" target="_blank" rel="noopener">10分钟掌握Python-机器学习小项目 - python大牛成长之路 - SegmentFault 思否</a></p>
 <p><a href="https://v.qq.com/x/page/u05499rig9s.html" target="_blank" rel="noopener">如何安装Python运行环境Anaconda？_腾讯视频</a></p>
 
-        </section>
+        </div>
 
         
             <section class="post-copyright">
@@ -309,8 +372,6 @@
                     
                     
                         <a href="/tag/ML/"># ML</a>
-                    
-                        <a href="/tag/Anaconda/"># Anaconda</a>
                     
                         
                 </span>

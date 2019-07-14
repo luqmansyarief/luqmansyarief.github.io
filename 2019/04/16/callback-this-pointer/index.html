@@ -31,8 +31,15 @@
     
     <script src="/js/script.js"></script>
     
+    <script src="/js/tocbot.min.js"></script>
+    
 
 
+
+    
+    
+        
+    
 
 
 </head>
@@ -100,6 +107,7 @@
             <div class="container">
     
     
+
     
     <article class="post-wrap">
         <header class="post-header">
@@ -120,7 +128,7 @@
             
         </header>
 
-        <section class="post-content">
+        <div class="post-content">
             <p>毕设的前端Vue项目中遇到一个问题:</p>
 <p>在登录方法中使用axios进行数据交互之后，回调函数中使用this.$notify()提示“该组件未注册”，也就是说this绑定的对象因为回调函数改变了指向。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 有问题的写法</span></span><br><span class="line">methods: &#123;</span><br><span class="line">  login: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    axios.post(<span class="string">'/api/admin/login'</span>, postData).then( <span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;  </span><br><span class="line">      <span class="comment">// 注意这里的写法，使用匿名函数</span></span><br><span class="line">            <span class="keyword">if</span> (response.data === <span class="number">1</span>) &#123;</span><br><span class="line">              <span class="keyword">this</span>.$notify.info(<span class="string">"登录成功"</span>) <span class="comment">// 这句提示notify组件未注册。</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              <span class="keyword">this</span>.$notify.error(<span class="string">"用户名或密码错误！"</span>) <span class="comment">// 这句同理</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;).catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(error);</span><br><span class="line">          &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -141,7 +149,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES5替代写法</span></span><br><span class="line">methods: &#123;</span><br><span class="line">  login: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> current = <span class="keyword">this</span>;</span><br><span class="line">    axios.post(<span class="string">'/api/admin/login'</span>, postData).then( <span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;  </span><br><span class="line">      <span class="comment">// 匿名函数</span></span><br><span class="line">            <span class="keyword">if</span> (response.data === <span class="number">1</span>) &#123;</span><br><span class="line">              current.$notify.info(<span class="string">"登录成功"</span>) <span class="comment">// 此处正常工作，因为current就是回调外的this</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              current.$notify.error(<span class="string">"用户名或密码错误！"</span>) <span class="comment">// 同理</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;).catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(error);</span><br><span class="line">          &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-        </section>
+        </div>
 
         
             <section class="post-copyright">

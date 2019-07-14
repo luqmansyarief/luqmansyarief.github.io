@@ -31,8 +31,15 @@
     
     <script src="/js/script.js"></script>
     
+    <script src="/js/tocbot.min.js"></script>
+    
 
 
+
+    
+    
+        
+    
 
 
 </head>
@@ -100,13 +107,69 @@
             <div class="container">
     
     
-        <div id="post-toc" class="post-toc">
-            <span class="post-toc-title">catalogue</span>
-            <div class="post-toc-content">
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DAY2-导游讲解技巧"><span class="toc-text">DAY2 导游讲解技巧</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#态势语言："><span class="toc-text">态势语言：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#吐字归音"><span class="toc-text">吐字归音</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表达技巧"><span class="toc-text">表达技巧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#讲解实战"><span class="toc-text">讲解实战</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导游词的撰写（略讲）"><span class="toc-text">导游词的撰写（略讲）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#我的思考"><span class="toc-text">我的思考</span></a></li></ol>
-            </div>
-        </div>
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
+
     
     <article class="post-wrap">
         <header class="post-header">
@@ -134,7 +197,7 @@
             
         </header>
 
-        <section class="post-content">
+        <div class="post-content">
             <h1 id="DAY2-导游讲解技巧"><a href="#DAY2-导游讲解技巧" class="headerlink" title="DAY2 导游讲解技巧"></a>DAY2 导游讲解技巧</h1><p>讲师：王冬 东北烈士纪念馆</p>
 <h2 id="态势语言："><a href="#态势语言：" class="headerlink" title="态势语言："></a>态势语言：</h2><p>就是肢体语言。心理学家：信息有效度=7%语音语言+38%的语音语调+55%态势语言</p>
 <p>态势语言要求：</p>
@@ -229,7 +292,7 @@
 <p>不对人直接下结论，尊重其所在的时代，具有同理心。关于公园里丝巾照相的现象理解的很到位。</p>
 <p>导游与文化传播类的讲解毕竟有所不同，但不专业的讲解（野史、八卦）一定会给人不好的感觉，应学习展馆讲解员的方式。反思自己曾作为哈军工讲解员，并没有思考这件事情，但短短两个月的讲解却带给我很多影响。</p>
 
-        </section>
+        </div>
 
         
             <section class="post-copyright">

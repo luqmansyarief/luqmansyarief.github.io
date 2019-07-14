@@ -31,8 +31,15 @@
     
     <script src="/js/script.js"></script>
     
+    <script src="/js/tocbot.min.js"></script>
+    
 
 
+
+    
+    
+        
+    
 
 
 </head>
@@ -100,13 +107,69 @@
             <div class="container">
     
     
-        <div id="post-toc" class="post-toc">
-            <span class="post-toc-title">catalogue</span>
-            <div class="post-toc-content">
-                <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#2019-3-20"><span class="toc-text">2019.3.20</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#注册服务"><span class="toc-text">注册服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#字符集配置"><span class="toc-text">字符集配置</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2019-3-24"><span class="toc-text">2019.3.24</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#项目构建"><span class="toc-text">项目构建</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#逆向工程"><span class="toc-text">逆向工程</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2019-3-24-Midnight-25"><span class="toc-text">2019.3.24 Midnight - 25</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#java执行条件查询"><span class="toc-text">java执行条件查询</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2019-4-10"><span class="toc-text">2019.4.10</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Springboot-热部署"><span class="toc-text">Springboot 热部署</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#页面的存放"><span class="toc-text">页面的存放</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#自动跳转默认页面"><span class="toc-text">自动跳转默认页面</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2019-5-1"><span class="toc-text">2019.5.1</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Mybatis关联查询"><span class="toc-text">Mybatis关联查询</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2019-5-2"><span class="toc-text">2019.5.2</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Mybatis关联查询后部分字段丢失（null）问题"><span class="toc-text">Mybatis关联查询后部分字段丢失（null）问题</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Mybatis关联查询后外键丢失（null）问题"><span class="toc-text">Mybatis关联查询后外键丢失（null）问题</span></a></li></ol></li></ol>
-            </div>
-        </div>
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
+
     
     <article class="post-wrap">
         <header class="post-header">
@@ -123,18 +186,11 @@
                         </span>
                     
                     
-                        <span class="post-category">
-                    Category:
-                            
-                                <a href="/category/Graduation-Project/">Graduation Project</a>
-                            
-                        </span>
-                    
                 </div>
             
         </header>
 
-        <section class="post-content">
+        <div class="post-content">
             <blockquote>
 <p>开个帖记录一下毕业设计流程和踩过的坑。实训时有老师和同学可以一起商议，毕设需要独立解决所有出现的问题。</p>
 <p>Enviornment：windows 10 x64，java 1.8，mysql 5.7</p>
@@ -313,7 +369,7 @@ spring.devtools.restart.additional-paths=src/main/java</code></pre><p>（另外�
 
 <p>这样可以避免同字段冲突。</p>
 
-        </section>
+        </div>
 
         
             <section class="post-copyright">
@@ -348,6 +404,8 @@ spring.devtools.restart.additional-paths=src/main/java</code></pre><p>（另外�
                         <a href="/tag/java/"># java</a>
                     
                         <a href="/tag/SpringBoot/"># SpringBoot</a>
+                    
+                        <a href="/tag/Graduation-Project/"># Graduation Project</a>
                     
                         
                 </span>

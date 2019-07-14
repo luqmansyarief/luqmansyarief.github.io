@@ -31,8 +31,15 @@
     
     <script src="/js/script.js"></script>
     
+    <script src="/js/tocbot.min.js"></script>
+    
 
 
+
+    
+    
+        
+    
 
 
 </head>
@@ -100,13 +107,69 @@
             <div class="container">
     
     
-        <div id="post-toc" class="post-toc">
-            <span class="post-toc-title">catalogue</span>
-            <div class="post-toc-content">
-                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#目录结构"><span class="toc-text">目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#风格·用法"><span class="toc-text">风格·用法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#计算属性"><span class="toc-text">计算属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表单控件绑定"><span class="toc-text">表单控件绑定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件绑定-Method"><span class="toc-text">事件绑定 Method</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ref是什么"><span class="toc-text">ref是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#初始化注意："><span class="toc-text">初始化注意：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#表单验证"><span class="toc-text">表单验证</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题·难点"><span class="toc-text">问题·难点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#依赖的引入"><span class="toc-text">依赖的引入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#默认路由跳转"><span class="toc-text">默认路由跳转</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#事件绑定"><span class="toc-text">事件绑定</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开发环境跨域配置"><span class="toc-text">开发环境跨域配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Promise-同步"><span class="toc-text">Promise 同步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生产环境跨域配置"><span class="toc-text">生产环境跨域配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模块懒加载"><span class="toc-text">模块懒加载</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目完成"><span class="toc-text">项目完成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#总结："><span class="toc-text">总结：</span></a></li></ol></li></ol>
-            </div>
-        </div>
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
+
     
     <article class="post-wrap">
         <header class="post-header">
@@ -123,18 +186,11 @@
                         </span>
                     
                     
-                        <span class="post-category">
-                    Category:
-                            
-                                <a href="/category/Graduation-Project/">Graduation Project</a>
-                            
-                        </span>
-                    
                 </div>
             
         </header>
 
-        <section class="post-content">
+        <div class="post-content">
             <p>本项目来源于Github上一个<a href="https://github.com/yangshengjin/vueAdmin" target="_blank" rel="noopener">管理系统页面项目</a></p>
 <h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><details>
 <summary>点击展开文件目录</summary>
@@ -269,7 +325,7 @@ $ vue init webpack [name] //创建名为name的项目。</code></pre><p><img src
 
 <h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>终于在毕业前学习了这个Vue框架并投入实际使用中，整个过程应该说是愉快而坎坷的，项目完成的今天真是收获了很多。</p>
 
-        </section>
+        </div>
 
         
             <section class="post-copyright">
@@ -304,6 +360,8 @@ $ vue init webpack [name] //创建名为name的项目。</code></pre><p><img src
                         <a href="/tag/FrontEnd/"># FrontEnd</a>
                     
                         <a href="/tag/Vue/"># Vue</a>
+                    
+                        <a href="/tag/Graduation-Project/"># Graduation Project</a>
                     
                         
                 </span>

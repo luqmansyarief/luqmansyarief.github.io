@@ -31,8 +31,15 @@
     
     <script src="/js/script.js"></script>
     
+    <script src="/js/tocbot.min.js"></script>
+    
 
 
+
+    
+    
+        
+    
 
 
 </head>
@@ -100,13 +107,69 @@
             <div class="container">
     
     
-        <div id="post-toc" class="post-toc">
-            <span class="post-toc-title">catalogue</span>
-            <div class="post-toc-content">
-                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#鸡鸭分类问题"><span class="toc-text">鸡鸭分类问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#比特币最佳买卖时机"><span class="toc-text">比特币最佳买卖时机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#爱吃喵粮的小招喵"><span class="toc-text">爱吃喵粮的小招喵</span></a></li></ol>
-            </div>
-        </div>
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
+
     
     <article class="post-wrap">
         <header class="post-header">
@@ -126,7 +189,7 @@
                         <span class="post-category">
                     Category:
                             
-                                <a href="/category/Algorithm-Exercises/">Algorithm Exercises</a>
+                                <a href="/category/Algorithm/">Algorithm</a>
                             
                         </span>
                     
@@ -134,7 +197,7 @@
             
         </header>
 
-        <section class="post-content">
+        <div class="post-content">
             <p><a href="https://www.nowcoder.com/profile/7617669/test/21552802/285161" target="_blank" rel="noopener">招商银行信用卡中心2019秋招IT笔试 题目链接</a></p>
 <h3 id="鸡鸭分类问题"><a href="#鸡鸭分类问题" class="headerlink" title="鸡鸭分类问题"></a><a href="https://www.nowcoder.com/questionTerminal/f87616abbac44842b43f24ddd3cf49e8" target="_blank" rel="noopener">鸡鸭分类问题</a></h3><p>农场有n只鸡鸭排为一个队伍，鸡用“C”表示，鸭用“D”表示。当鸡鸭挨着时会产生矛盾。需要对所排的队伍进行调整，使鸡鸭各在一边。每次调整只能让相邻的鸡和鸭交换位置，现在需要尽快完成队伍调整，你需要计算出最少需要调整多少次可以让上述情况最少。例如：CCDCC-&gt;CCCDC-&gt;CCCCD这样就能使之前的两处鸡鸭相邻变为一处鸡鸭相邻，需要调整队形两次。</p>
 <p>输入描述:</p>
@@ -200,7 +263,7 @@
 
 <p><em>吐槽：第二题一发AC的感觉真爽</em></p>
 
-        </section>
+        </div>
 
         
             <section class="post-copyright">

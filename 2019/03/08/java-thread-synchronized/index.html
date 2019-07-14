@@ -31,8 +31,15 @@
     
     <script src="/js/script.js"></script>
     
+    <script src="/js/tocbot.min.js"></script>
+    
 
 
+
+    
+    
+        
+    
 
 
 </head>
@@ -100,13 +107,69 @@
             <div class="container">
     
     
-        <div id="post-toc" class="post-toc">
-            <span class="post-toc-title">catalogue</span>
-            <div class="post-toc-content">
-                <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、同步方法"><span class="toc-text">一、同步方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、同步代码块"><span class="toc-text">二、同步代码块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#synchronized同步方法小结："><span class="toc-text">synchronized同步方法小结：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、wait与notify"><span class="toc-text">三、wait与notify</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、使用特殊域变量-volatile-实现线程同步"><span class="toc-text">四、使用特殊域变量(volatile)实现线程同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、使用重入锁实现线程同步"><span class="toc-text">五、使用重入锁实现线程同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、使用阻塞队列实现线程同步"><span class="toc-text">六、使用阻塞队列实现线程同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#七、使用原子变量实现线程同步"><span class="toc-text">七、使用原子变量实现线程同步</span></a></li></ol>
-            </div>
-        </div>
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
+
     
     <article class="post-wrap">
         <header class="post-header">
@@ -127,7 +190,7 @@
             
         </header>
 
-        <section class="post-content">
+        <div class="post-content">
             <h3 id="一、同步方法"><a href="#一、同步方法" class="headerlink" title="一、同步方法"></a>一、同步方法</h3><p>　　即有synchronized关键字修饰的方法。 由于java的每个对象都有一个内置锁，当用此关键字修饰方法时， 内置锁会保护整个方法。在调用该方法前，需要获得内置锁，否则就处于阻塞状态。</p>
 <p>注： synchronized关键字也可以修饰静态方法，此时如果调用该静态方法，将会锁住整个类。</p>
 <h3 id="二、同步代码块"><a href="#二、同步代码块" class="headerlink" title="二、同步代码块"></a>二、同步代码块</h3><p>　　即有synchronized关键字修饰的语句块。 被该关键字修饰的语句块会自动被加上内置锁，从而实现同步</p>
@@ -189,7 +252,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bank</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AtomicInteger account = <span class="keyword">new</span> AtomicInteger(<span class="number">100</span>);</span><br><span class="line">    <span class="function"><span class="keyword">public</span> AtomicInteger <span class="title">getAccount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> account;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">save</span><span class="params">(<span class="keyword">int</span> money)</span> </span>&#123;</span><br><span class="line">        account.addAndGet(money);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-        </section>
+        </div>
 
         
             <section class="post-copyright">
