@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="description" content="this site is Sirice's blog.">
+
+
+    <meta name="keywords" content="Sirice, LiuZijian, Blog, CodeBlog">
+
+
+<title>原型与原型继承 | Sirice&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sirice&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sirice&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">原型与原型继承</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sirice</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 2, 2019&nbsp;&nbsp;23:22:51</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>之前一直不理解JavaScript中的原型链机制，最近读过《你不知道的JavaScript（上卷）》后终于有点理解了，在这里记录一下。</p>
+<h1 id="什么是原型"><a href="#什么是原型" class="headerlink" title="什么是原型"></a>什么是原型</h1><p>JavaScript中所有对象都有一个[[Prototype]]内置属性，Python中的对象中也有类似的默认内置属性（通过<code>print(dir(Object))</code>可以查看）。</p>
+<p>JS与Java在OOP上的区别就在于：ES5中没有类(ES6和TS支持class)，只有对象，所有的对象都是对象与对象的关系，而OOP中强调的是通过类的模板语法实现类与类的关系。</p>
+<p>因此从语言设计上来说，为了实现OOP原本属于class的职责在JS中就交给Object来做，这就是对象原型(Prototype)。</p>
+<h1 id="原型调用的示例"><a href="#原型调用的示例" class="headerlink" title="原型调用的示例"></a>原型调用的示例</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObject = &#123; <span class="attr">a</span>:<span class="number">2</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(myObject.a) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>当访问对象属性时会触发[[Get]]操作，首先判断该对象是否有此属性，有的话就使用。</p>
+<p>但当a不在<code>myObject</code>中，仍要使用时就会调用原型链。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> anotherObject = &#123; <span class="attr">a</span>:<span class="number">2</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> myObject = <span class="built_in">Object</span>.create( myObject );</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myObject.a) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+
+<p>该代码表明，当<code>myObject</code>没有a属性时，会沿其原型链往上查找，直到有这个属性并返回；若没有这个属性，会查找整条原型链并返回Undefined。原型链顶端是Object.prototype。</p>
+<h1 id="属性设置与屏蔽"><a href="#属性设置与屏蔽" class="headerlink" title="属性设置与屏蔽"></a>属性设置与屏蔽</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myObject.foo = <span class="string">"bar"</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果foo是myObject的属性，这句可以直接赋值</li>
+<li>如果foo不是myObject的属性，这句会触发原型链的遍历。原型链上如果不存在foo，这个属性会添加到myObject上</li>
+<li>如果foo是myObject的属性，且原型链上层也有对象包含foo属性，那么会触发属性屏蔽，bar赋值只会影响到myObject，不影响原型链上层所有含foo属性的对象。</li>
+<li>如果foo不是myObject的属性，但原型链上层含有foo属性，则可能产生以下几种情况：<ul>
+<li>[[Prototype]]链上层存在foo并且该属性未被标记为只读(“writable:true”)则会直接在myObject上添加foo的新属性</li>
+<li>[[Prototype]]链上层存在foo并且该属性被标记为只读(“writable:false”)，那么无法修改已有属性或在myObject上创建屏蔽属性。正常模式下会忽略该句，在严格模式下会抛出错误。也就是说不会发生屏蔽。</li>
+<li>如果在[[Prototype]]上层存在foo且为一个setter，那就一定会调用这个setter，foo不会被添加到myObject上，也不会重定义这个setter。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> anotherObject = &#123;<span class="attr">a</span>:<span class="number">2</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> myObject = <span class="built_in">Object</span>.create( anotherObject );</span><br><span class="line"></span><br><span class="line">anotherObject.a <span class="comment">// 2</span></span><br><span class="line">myObject.a <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line">anotherObject.hasOwnProperty(<span class="string">"a"</span>); <span class="comment">// true</span></span><br><span class="line">myObject.hasOwnProperty(<span class="string">"a"</span>); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">myObject.a+=<span class="number">1</span>; <span class="comment">// 属性屏蔽</span></span><br><span class="line"></span><br><span class="line">anotherObject.a <span class="comment">// 2</span></span><br><span class="line">myObject.a <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line">myObject.hasOwnProperty(<span class="string">"a"</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="new关键字与原型继承"><a href="#new关键字与原型继承" class="headerlink" title="new关键字与原型继承"></a>new关键字与原型继承</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>)</span>&#123; <span class="comment">/* ... */</span>&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Foo()</span><br></pre></td></tr></table></figure>
+
+<p>这个语句做了什么？</p>
+<p>a对象是在调用<code>new Foo()</code>时创建的，它的prototype会被关联到Foo.prototype上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getPrototypeof(a) === Foo.prototype <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>也就是说，与Java在调用new时会产生class的实例不同，JavaScript调用new直接产生相关联的对象，这些对象的prototype全部指向同一个对象。</p>
+<p>但以上原型关联只是new的一个副作用，new的本意并不是直接创建关联。直接实现该效果的函数为<code>Object.create(obj)</code></p>
+<p>这个机制被称为<strong>原型继承</strong>，但与Java OOP的继承不同的是，Java中继承就是将Class中的属性、方法复制到实例中；而JS原型继承没有复制，只有与原型链的关联。所以从意义上来说原型继承和继承实际没有任何关系。。</p>
+<h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><p><em>以下所有示例代码为一整段拆分</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Foo.prototype.constructor === Foo) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Foo()</span><br><span class="line"><span class="built_in">console</span>.log(a.constructor === Foo) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(a.constructor) <span class="comment">// [Function: Foo]</span></span><br></pre></td></tr></table></figure>
+
+<p><code>new Foo()</code>语句调用了函数中的<code>Foo.prototype.constructor</code>方法</p>
+<p>但a没有自己的constructor</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> a(); <span class="comment">// Uncaught TypeError: a is not a constructor</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="built_in">Object</span>.create(a);</span><br><span class="line"><span class="built_in">console</span>.log(c.constructor); <span class="comment">// function Foo()&#123; &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个示例就是new调用a报错因为a没有构造函数，而b企图把原型绑定到a上。</p>
+<p>但c是从a创建来的对象，它的原型也被绑定到Foo上而不是a上，所以正确运行。</p>
+<p><strong>小结：</strong> 在普通函数前面使用new，会把该函数变成一个“构造函数调用”，new会劫持所有普通函数并用构造函数的形式来调用它。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Foo.prototype = &#123;<span class="attr">a</span>:<span class="number">2</span>&#125; <span class="comment">// 此处更改了Foo.prototype的默认实现</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> Foo()</span><br><span class="line"><span class="comment">// Foo原型对象更改</span></span><br><span class="line"><span class="built_in">console</span>.log(b.constructor === Foo) <span class="comment">// false</span></span><br><span class="line"><span class="comment">// b.constructor被指向Object而不再是Foo</span></span><br><span class="line"><span class="built_in">console</span>.log(b.constructor) <span class="comment">// [Function: Object]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 此处将constructor重新指向Foo.prototype */</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Foo.prototype,<span class="string">"constructor"</span>,&#123;</span><br><span class="line">    enumerable:<span class="literal">true</span>,</span><br><span class="line">    writable:<span class="literal">true</span>,</span><br><span class="line">    configurable:<span class="literal">true</span>,</span><br><span class="line">    value:Foo</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> Foo()</span><br><span class="line"><span class="built_in">console</span>.log(c.constructor === Foo) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(c.constructor) <span class="comment">// [Function: Foo]</span></span><br></pre></td></tr></table></figure>
+
+<p>因此，<code>a.construtor</code>是不可靠且不安全的引用，实际使用中应该避免这种写法。</p>
+<p><strong>相关阅读:</strong></p>
+<p><a href="https://www.cnblogs.com/strick/p/5838126.html" target="_blank" rel="noopener">《你不知道的JavaScript》整理（四）——原型 - 咖啡机(K.F.J)</a></p>
+<p><a href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023021997355072" target="_blank" rel="noopener">原型继承 - 廖雪峰的官方网站</a></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sirice</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://siricee.github.io/2019/08/02/JavaScript-Prototype/">https://siricee.github.io/2019/08/02/JavaScript-Prototype/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>本文采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享 署名-非商业性使用-禁止演绎(CC BY-NC-ND)国际许可协议</a>进行许可</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tag/JavaScript/"># JavaScript</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2019/07/09/FrontEnd-architecture-desigin/">前端架构设计的思考</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sirice | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>

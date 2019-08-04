@@ -860,7 +860,7 @@ header label {
 .post-content table th,
 .post-content table td {
   padding: 5px 15px;
-  border: 0.5px double #e8e8e8;
+  border: 0.5px solid #e8e8e8;
 }
 .post-content .image-caption:not(:empty) {
   min-width: 20%;
@@ -896,10 +896,26 @@ header label {
 .post-content blockquote p {
   margin: 0;
 }
+.post-content blockquote footer strong {
+  margin-right: 0.5em;
+}
 .dark-theme .post-content blockquote {
   color: #a9a9b3;
   background-color: #3e3e3e;
   border-left: 2px solid #dcdcdc;
+}
+.post-content blockquote.pullquote {
+  background-color: transparent;
+  max-width: 45%;
+  border: 0;
+}
+.post-content blockquote.pullquote.left {
+  float: left;
+  text-align: left;
+}
+.post-content blockquote.pullquote.right {
+  float: right;
+  text-align: right;
 }
 .post-copyright {
   margin-top: 5rem;
@@ -957,6 +973,14 @@ header label {
   width: 6px;
   background-color: #eee;
   border-radius: 2px;
+}
+.post-content figure.highlight figcaption {
+  padding: 0 0.5em;
+  text-align: right;
+  font-size: 13px;
+}
+.post-content figure.highlight figcaption span {
+  margin: 0 0.5em;
 }
 .post-content figure.highlight table {
   position: relative;
@@ -1227,76 +1251,47 @@ header label {
   }
 }
 .highlight {
-  color: #333;
-  background: #f8f8f8;
-}
-.highlight .code .comment,
-.highlight .code .quote {
-  color: #998;
-  font-style: italic;
+  color: #00193a;
+  background: #eaeef3;
 }
 .highlight .code .keyword,
 .highlight .code .selector-tag,
-.highlight .code .subst {
-  color: #333;
-  font-weight: bold;
-}
-.highlight .code .number,
-.highlight .code .literal,
-.highlight .code .variable,
-.highlight .code .template-variable,
-.highlight .code .tag .attr {
-  color: #008080;
-}
-.highlight .code .string,
-.highlight .code .doctag {
-  color: #d14;
-}
 .highlight .code .title,
 .highlight .code .section,
-.highlight .code .selector-id {
-  color: #900;
-  font-weight: bold;
-}
-.highlight .code .subst {
-  font-weight: normal;
-}
-.highlight .code .type,
-.highlight .code .class .title {
-  color: #458;
-  font-weight: bold;
-}
-.highlight .code .tag,
+.highlight .code .doctag,
 .highlight .code .name,
-.highlight .code .attribute {
-  color: #000080;
-  font-weight: normal;
-}
-.highlight .code .regexp,
-.highlight .code .link {
-  color: #009926;
-}
-.highlight .code .symbol,
-.highlight .code .bullet {
-  color: #990073;
-}
-.highlight .code .built_in,
-.highlight .code .builtin-name {
-  color: #0086b3;
-}
-.highlight .code .meta {
-  color: #999;
+.highlight .code .strong {
   font-weight: bold;
 }
-.highlight .code .deletion {
-  background: #fdd;
+.highlight .code .comment {
+  color: #738191;
 }
-.highlight .code .addition {
-  background: #dfd;
+.highlight .code .string,
+.highlight .code .title,
+.highlight .code .section,
+.highlight .code .built_in,
+.highlight .code .literal,
+.highlight .code .type,
+.highlight .code .addition,
+.highlight .code .tag,
+.highlight .code .quote,
+.highlight .code .name,
+.highlight .code .selector-id,
+.highlight .code .selector-class {
+  color: #0048ab;
+}
+.highlight .code .meta,
+.highlight .code .subst,
+.highlight .code .symbol,
+.highlight .code .regexp,
+.highlight .code .attribute,
+.highlight .code .deletion,
+.highlight .code .variable,
+.highlight .code .template-variable,
+.highlight .code .link,
+.highlight .code .bullet {
+  color: #4c81c9;
 }
 .highlight .code .emphasis {
   font-style: italic;
-}
-.highlight .code .strong {
-  font-weight: bold;
 }
