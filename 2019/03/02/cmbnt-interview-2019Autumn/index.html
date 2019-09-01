@@ -236,28 +236,8 @@
 <p>解析</p>
 <p>枚举两种最终状态，CDCCC，要么变成DCCCC，要么变成CCCCD；</p>
 <p>对于其中任意一种状态的每一个需要移动的元素，只需要看一下移动的方向上有多少个不一样的元素，然后累加起来就行了。</p>
-<pre><code class="java">import java.util.Scanner;
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner scanner=<span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        String input=<span class="string">""</span>;</span><br><span class="line">        <span class="keyword">int</span> result=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        input=scanner.nextLine();</span><br><span class="line">        String[] s=input.split(<span class="string">""</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> l=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;s.length;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i].equals(<span class="string">"C"</span>))&#123;</span><br><span class="line">                result+=i-l;</span><br><span class="line">                l++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner=new Scanner(System.in);
-        String input=&quot;&quot;;
-        int result=0;
-
-        input=scanner.nextLine();
-        String[] s=input.split(&quot;&quot;);
-
-        int l=0;
-        for(int i=0;i&lt;s.length;i++){
-            if(s[i].equals(&quot;C&quot;)){
-                result+=i-l;
-                l++;
-            }
-        }
-
-        System.out.println(result);
-    }
-}</code></pre>
 <p>以上代码仅一个方向排序就ac了。。。实际应该<strong>两次排序取结果最小值</strong>。</p>
 <h3 id="比特币最佳买卖时机"><a href="#比特币最佳买卖时机" class="headerlink" title="比特币最佳买卖时机"></a><a href="https://www.nowcoder.com/questionTerminal/08f70daa78bf45fea64d72523a3641f3" target="_blank" rel="noopener">比特币最佳买卖时机</a></h3><p>给定一个正整数数组，它的第 i 个元素是比特币第 i 天的价格。</p>
 <p>如果你最多只允许完成一笔交易（即买入和卖出一次），设计一个算法来计算你所能获取的最大利润。</p>
@@ -274,75 +254,14 @@ public class Main {
 <blockquote>
 <p>输入 <br><br>7 1 5 3 6 4 <br><br>输出 <br><br>5</p>
 </blockquote>
-<pre><code class="java">import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-/*
-*    O(n²)的做法
-*/
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
-        while(sc.hasNext()) {
-            list.add(Integer.parseInt(sc.next()));
-        }
-        int[] num = new int[list.size()];
-        for(int i=0;i&lt;list.size();i++) {
-            num[i] = list.get(i);
-        }
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*    O(n²)的做法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		<span class="keyword">while</span>(sc.hasNext()) &#123;</span><br><span class="line">			list.add(Integer.parseInt(sc.next()));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span>[] num = <span class="keyword">new</span> <span class="keyword">int</span>[list.size()];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;list.size();i++) &#123;</span><br><span class="line">			num[i] = list.get(i);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; num.length-<span class="number">1</span>; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = i+<span class="number">1</span>; j &lt; num.length; j++) &#123;</span><br><span class="line">				<span class="keyword">if</span>(num[i]&lt;num[j] &amp;&amp; num[j]-num[i]&gt;max) &#123;</span><br><span class="line">					max = num[j] - num[i];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(max);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        int max = 0;
-
-        for (int i = 0; i &lt; num.length-1; i++) {
-            for (int j = i+1; j &lt; num.length; j++) {
-                if(num[i]&lt;num[j] &amp;&amp; num[j]-num[i]&gt;max) {
-                    max = num[j] - num[i];
-                }
-            }
-        }
-        System.out.println(max);
-
-    }
-}
-</code></pre>
 <p>这里讲一下O(n)的做法。</p>
 <p>对于第i个位置上的元素，我们只需要知道区间[0, i - 1]最小值，就可以得出第二个数的位置为i的最大差值有序偶，枚举i就可以得出答案；而区间[0, i - 1]最小值可以预处理出来。</p>
 <p>因此总体时间复杂度为O(n)</p>
 <p><a href="https://blog.csdn.net/FlushHip/article/details/84137906" target="_blank" rel="noopener">原文链接：招商银行信用卡中心2019秋招IT笔试(AI、开发、测试开发方向)第一批 - FlushHip - CSDN博客</a></p>
-<pre><code class="java">import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-/*
-*    O(n)的做法
-*/
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
-        while(sc.hasNext()) {
-            list.add(Integer.parseInt(sc.next()));
-        }
-        int[] num = new int[list.size()];
-        for(int i=0;i&lt;list.size();i++) {
-            num[i] = list.get(i);
-        }
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*    O(n)的做法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">		List&lt;Integer&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">		<span class="keyword">while</span>(sc.hasNext()) &#123;</span><br><span class="line">			list.add(Integer.parseInt(sc.next()));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span>[] num = <span class="keyword">new</span> <span class="keyword">int</span>[list.size()];</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;list.size();i++) &#123;</span><br><span class="line">			num[i] = list.get(i);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">int</span> max = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> min = num[<span class="number">0</span>];</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; num.length; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span>(num[i]-min &gt; max) &#123;</span><br><span class="line">				max = num[i] - min;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(min &gt; num[i]) &#123;</span><br><span class="line">				min = num[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		System.out.println(max);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        int max = 0;
-        int min = num[0];
-        for (int i = 1; i &lt; num.length; i++) {
-            if(num[i]-min &gt; max) {
-                max = num[i] - min;
-            }
-            if(min &gt; num[i]) {
-                min = num[i];
-            }
-        }
-
-        System.out.println(max);
-
-    }
-}</code></pre>
 <h3 id="爱吃喵粮的小招喵"><a href="#爱吃喵粮的小招喵" class="headerlink" title="爱吃喵粮的小招喵"></a><a href="https://www.nowcoder.com/questionTerminal/336d00e600f8496287d0d472678da774" target="_blank" rel="noopener">爱吃喵粮的小招喵</a></h3><p>小招喵喜欢吃喵粮。这里有 N 堆喵粮，第 i 堆中有 p[i] 粒喵粮。喵主人离开了，将在 H 小时后回来。</p>
 <p>小招喵可以决定她吃喵粮的速度 K （单位：粒/小时）。每个小时，她将会选择一堆喵粮，从中吃掉 K 粒。如果这堆喵粮少于 K 粒，她将吃掉这堆的所有喵粮，然后这一小时内不会再吃更多的喵粮。  </p>
 <p>小招喵喜欢慢慢吃，但仍然想在喵主人回来前吃掉所有的喵粮。</p>
@@ -361,40 +280,8 @@ public class Main {
 <p>输入 <br><br>3 6 7 11 <br><br>8 <br><br>输出 <br><br>4</p>
 </blockquote>
 <p>解析：<strong>二分解法取下界</strong> O(logn)</p>
-<pre><code class="java">import java.util.Scanner;
-import java.util.ArrayList;
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        ArrayList&lt;Integer&gt; food=<span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">while</span>(in.hasNextInt())&#123;</span><br><span class="line">            food.add(in.nextInt());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> num=food.size()-<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//注意此处ArrayList转换为Integer[]的写法</span></span><br><span class="line">        Integer[] fo=food.toArray(<span class="keyword">new</span> Integer[food.size()]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> planTime=fo[fo.length-<span class="number">1</span>];</span><br><span class="line">        in.close();</span><br><span class="line">        <span class="keyword">int</span> realTime=planTime+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> speed;</span><br><span class="line">        <span class="keyword">for</span>(speed=<span class="number">1</span>;realTime&gt;planTime;speed++)&#123;</span><br><span class="line">            realTime=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;num;i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>((fo[i]%speed)!=<span class="number">0</span>&amp;&amp;fo[i]&gt;speed)&#123;</span><br><span class="line">                    realTime+=fo[i]/speed+<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(fo[i]&lt;speed)</span><br><span class="line">                    realTime++;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    realTime+=fo[i]/speed;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(--speed);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public class Main{
-    public static void main(String[] args){
-        Scanner in = new Scanner(System.in);
-        ArrayList&lt;Integer&gt; food=new ArrayList&lt;&gt;();
-        while(in.hasNextInt()){
-            food.add(in.nextInt());
-        }
-        int num=food.size()-1;
-
-        //注意此处ArrayList转换为Integer[]的写法
-        Integer[] fo=food.toArray(new Integer[food.size()]);
-
-        int planTime=fo[fo.length-1];
-        in.close();
-        int realTime=planTime+1;
-        int speed;
-        for(speed=1;realTime&gt;planTime;speed++){
-            realTime=0;
-            for(int i=0;i&lt;num;i++){
-                if((fo[i]%speed)!=0&amp;&amp;fo[i]&gt;speed){
-                    realTime+=fo[i]/speed+1;
-                }
-                else if(fo[i]&lt;speed)
-                    realTime++;
-                else
-                    realTime+=fo[i]/speed;
-            }
-        }
-        System.out.println(--speed);
-    }
-}</code></pre>
 <p><em>吐槽：第二题一发AC的感觉真爽</em></p>
 
         </div>
