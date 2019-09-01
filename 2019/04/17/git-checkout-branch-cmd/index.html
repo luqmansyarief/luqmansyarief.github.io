@@ -59,7 +59,7 @@
                 
                     <a class="menu-item" href="/tag">Tags</a>
                 
-                    <a class="menu-item" href="/projects">Projects</a>
+                    <a class="menu-item" href="/collection">Collections</a>
                 
                     <a class="menu-item" href="/about">About</a>
                 
@@ -87,7 +87,7 @@
                 
                     <a class="menu-item" href="/tag">Tags</a>
                 
-                    <a class="menu-item" href="/projects">Projects</a>
+                    <a class="menu-item" href="/collection">Collections</a>
                 
                     <a class="menu-item" href="/about">About</a>
                 
@@ -136,9 +136,14 @@
 
         <div class="post-content">
             <p>本地代码上传到github的远程分支</p>
-<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> git init</span><br><span class="line"><span class="symbol">$</span> git add .</span><br><span class="line"><span class="symbol">$</span> git commit -m <span class="string">"commit messages"</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">$</span> git branch dev2<span class="number">.4</span>  <span class="comment">// 创建本地分支</span></span><br><span class="line"><span class="symbol">$</span> git checkout dev2<span class="number">.4</span> <span class="comment">// 切换到本地分支</span></span><br><span class="line"><span class="symbol">$</span> git remote add origin [address.git] <span class="comment">// 关联远程仓库</span></span><br><span class="line"><span class="symbol">$</span> git push origin dev2<span class="number">.4</span> <span class="comment">// 上传到远程分支</span></span><br></pre></td></tr></table></figure>
+<pre><code>$ git init
+$ git add .
+$ git commit -m &quot;commit messages&quot;
 
-
+$ git branch dev2.4  // 创建本地分支
+$ git checkout dev2.4 // 切换到本地分支
+$ git remote add origin [address.git] // 关联远程仓库
+$ git push origin dev2.4 // 上传到远程分支</code></pre>
         </div>
 
         
