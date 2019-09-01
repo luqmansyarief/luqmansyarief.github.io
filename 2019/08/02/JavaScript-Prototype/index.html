@@ -39,9 +39,24 @@
 
 
 
+    <!-- mathjax script -->
     
     
         
+    
+
+
+
+
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d53ba8f0fba478a1a58df931ebcbec7";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
     
 
 </head>
@@ -201,15 +216,16 @@
 <h1 id="什么是原型"><a href="#什么是原型" class="headerlink" title="什么是原型"></a>什么是原型</h1><p>JavaScript中所有对象都有一个[[Prototype]]内置属性，Python中的对象中也有类似的默认内置属性（通过<code>print(dir(Object))</code>可以查看）。</p>
 <p>JS与Java在OOP上的区别就在于：ES5中没有类(ES6和TS支持class)，只有对象，所有的对象都是对象与对象的关系，而OOP中强调的是通过类的模板语法实现类与类的关系。</p>
 <p>因此从语言设计上来说，为了实现OOP原本属于class的职责在JS中就交给Object来做，这就是对象原型(Prototype)。</p>
-<h1 id="原型调用的示例"><a href="#原型调用的示例" class="headerlink" title="原型调用的示例"></a>原型调用的示例</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObject = &#123; <span class="attr">a</span>:<span class="number">2</span> &#125;;</span><br><span class="line"><span class="built_in">console</span>.log(myObject.a) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
-
+<h1 id="原型调用的示例"><a href="#原型调用的示例" class="headerlink" title="原型调用的示例"></a>原型调用的示例</h1><pre><code class="javascript">var myObject = { a:2 };
+console.log(myObject.a) // 2 </code></pre>
 <p>当访问对象属性时会触发[[Get]]操作，首先判断该对象是否有此属性，有的话就使用。</p>
 <p>但当a不在<code>myObject</code>中，仍要使用时就会调用原型链。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> anotherObject = &#123; <span class="attr">a</span>:<span class="number">2</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> myObject = <span class="built_in">Object</span>.create( myObject );</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myObject.a) <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">var anotherObject = { a:2 };
+var myObject = Object.create( myObject );
 
+console.log(myObject.a) // 2 </code></pre>
 <p>该代码表明，当<code>myObject</code>没有a属性时，会沿其原型链往上查找，直到有这个属性并返回；若没有这个属性，会查找整条原型链并返回Undefined。原型链顶端是Object.prototype。</p>
-<h1 id="属性设置与屏蔽"><a href="#属性设置与屏蔽" class="headerlink" title="属性设置与屏蔽"></a>属性设置与屏蔽</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myObject.foo = <span class="string">"bar"</span>;</span><br></pre></td></tr></table></figure>
-
+<h1 id="属性设置与屏蔽"><a href="#属性设置与屏蔽" class="headerlink" title="属性设置与屏蔽"></a>属性设置与屏蔽</h1><pre><code class="javascript">myObject.foo = &quot;bar&quot;; </code></pre>
 <ul>
 <li>如果foo是myObject的属性，这句可以直接赋值</li>
 <li>如果foo不是myObject的属性，这句会触发原型链的遍历。原型链上如果不存在foo，这个属性会添加到myObject上</li>
@@ -221,34 +237,89 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> anotherObject = &#123;<span class="attr">a</span>:<span class="number">2</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> myObject = <span class="built_in">Object</span>.create( anotherObject );</span><br><span class="line"></span><br><span class="line">anotherObject.a <span class="comment">// 2</span></span><br><span class="line">myObject.a <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line">anotherObject.hasOwnProperty(<span class="string">"a"</span>); <span class="comment">// true</span></span><br><span class="line">myObject.hasOwnProperty(<span class="string">"a"</span>); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">myObject.a+=<span class="number">1</span>; <span class="comment">// 属性屏蔽</span></span><br><span class="line"></span><br><span class="line">anotherObject.a <span class="comment">// 2</span></span><br><span class="line">myObject.a <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line">myObject.hasOwnProperty(<span class="string">"a"</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">var anotherObject = {a:2};
+var myObject = Object.create( anotherObject );
 
-<h1 id="new关键字与原型继承"><a href="#new关键字与原型继承" class="headerlink" title="new关键字与原型继承"></a>new关键字与原型继承</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>)</span>&#123; <span class="comment">/* ... */</span>&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Foo()</span><br></pre></td></tr></table></figure>
+anotherObject.a // 2
+myObject.a // 2
 
+anotherObject.hasOwnProperty(&quot;a&quot;); // true
+myObject.hasOwnProperty(&quot;a&quot;); // false
+
+myObject.a+=1; // 属性屏蔽
+
+anotherObject.a // 2
+myObject.a // 3
+
+myObject.hasOwnProperty(&quot;a&quot;); // true</code></pre>
+<h1 id="new关键字与原型继承"><a href="#new关键字与原型继承" class="headerlink" title="new关键字与原型继承"></a>new关键字与原型继承</h1><pre><code class="javascript">function Foo(){ /* ... */}
+var a = new Foo()</code></pre>
 <p>这个语句做了什么？</p>
 <p>a对象是在调用<code>new Foo()</code>时创建的，它的prototype会被关联到Foo.prototype上。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getPrototypeof(a) === Foo.prototype <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript">Object.getPrototypeof(a) === Foo.prototype // true</code></pre>
 <p>也就是说，与Java在调用new时会产生class的实例不同，JavaScript调用new直接产生相关联的对象，这些对象的prototype全部指向同一个对象。</p>
 <p>但以上原型关联只是new的一个副作用，new的本意并不是直接创建关联。直接实现该效果的函数为<code>Object.create(obj)</code></p>
 <p>这个机制被称为<strong>原型继承</strong>，但与Java OOP的继承不同的是，Java中继承就是将Class中的属性、方法复制到实例中；而JS原型继承没有复制，只有与原型链的关联。所以从意义上来说原型继承和继承实际没有任何关系。。</p>
 <h1 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h1><p><em>以下所有示例代码为一整段拆分</em></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Foo.prototype.constructor === Foo) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Foo()</span><br><span class="line"><span class="built_in">console</span>.log(a.constructor === Foo) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(a.constructor) <span class="comment">// [Function: Foo]</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">function Foo(){}
+console.log(Foo.prototype.constructor === Foo) // true
 
+var a = new Foo()
+console.log(a.constructor === Foo) // true
+console.log(a.constructor) // [Function: Foo]</code></pre>
 <p><code>new Foo()</code>语句调用了函数中的<code>Foo.prototype.constructor</code>方法</p>
 <p>但a没有自己的constructor</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> a(); <span class="comment">// Uncaught TypeError: a is not a constructor</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="built_in">Object</span>.create(a);</span><br><span class="line"><span class="built_in">console</span>.log(c.constructor); <span class="comment">// function Foo()&#123; &#125;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">var b = new a(); // Uncaught TypeError: a is not a constructor
 
+var c = Object.create(a);
+console.log(c.constructor); // function Foo(){ }</code></pre>
 <p>这个示例就是new调用a报错因为a没有构造函数，而b企图把原型绑定到a上。</p>
 <p>但c是从a创建来的对象，它的原型也被绑定到Foo上而不是a上，所以正确运行。</p>
 <p><strong>小结：</strong> 在普通函数前面使用new，会把该函数变成一个“构造函数调用”，new会劫持所有普通函数并用构造函数的形式来调用它。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Foo.prototype = &#123;<span class="attr">a</span>:<span class="number">2</span>&#125; <span class="comment">// 此处更改了Foo.prototype的默认实现</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> Foo()</span><br><span class="line"><span class="comment">// Foo原型对象更改</span></span><br><span class="line"><span class="built_in">console</span>.log(b.constructor === Foo) <span class="comment">// false</span></span><br><span class="line"><span class="comment">// b.constructor被指向Object而不再是Foo</span></span><br><span class="line"><span class="built_in">console</span>.log(b.constructor) <span class="comment">// [Function: Object]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 此处将constructor重新指向Foo.prototype */</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Foo.prototype,<span class="string">"constructor"</span>,&#123;</span><br><span class="line">    enumerable:<span class="literal">true</span>,</span><br><span class="line">    writable:<span class="literal">true</span>,</span><br><span class="line">    configurable:<span class="literal">true</span>,</span><br><span class="line">    value:Foo</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = <span class="keyword">new</span> Foo()</span><br><span class="line"><span class="built_in">console</span>.log(c.constructor === Foo) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(c.constructor) <span class="comment">// [Function: Foo]</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">Foo.prototype = {a:2} // 此处更改了Foo.prototype的默认实现
+var b = new Foo()
+// Foo原型对象更改
+console.log(b.constructor === Foo) // false
+// b.constructor被指向Object而不再是Foo
+console.log(b.constructor) // [Function: Object]
 
+/* 此处将constructor重新指向Foo.prototype */
+Object.defineProperty(Foo.prototype,&quot;constructor&quot;,{
+    enumerable:true,
+    writable:true,
+    configurable:true,
+    value:Foo
+})
+
+var c = new Foo()
+console.log(c.constructor === Foo) // true
+console.log(c.constructor) // [Function: Foo]</code></pre>
 <p>因此，<code>a.construtor</code>是不可靠且不安全的引用，实际使用中应该避免这种写法。</p>
 <h1 id="call与apply"><a href="#call与apply" class="headerlink" title="call与apply"></a>call与apply</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>apply 和 call 都是 JS 函数对象的原型方法, 因此我们可以在任何的函数调用这两个方法, 主要作用就是使得对象能够调用到本来不属于它的方法(就是对象的本领)</p>
 <p>举例:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* cat有run()方法，dog有eat()方法 */</span></span><br><span class="line"><span class="keyword">const</span> cat = &#123;</span><br><span class="line">    name:<span class="string">'cat'</span>,</span><br><span class="line">    run() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name +<span class="string">' can run'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> dog = &#123;</span><br><span class="line">    name:<span class="string">'dog'</span>,</span><br><span class="line">    eat() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name +<span class="string">' eat bones'</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">    count(a, b) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.name&#125;</span>:<span class="subst">$&#123;a&#125;</span> + <span class="subst">$&#123;b&#125;</span> = <span class="subst">$&#123;a + b&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">cat.run() <span class="comment">// cat can run</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 此时dog没有run方法，但dog也想调用run怎么办呢</span></span><br><span class="line">cat.run.apply(dog) <span class="comment">// dog can run</span></span><br><span class="line"><span class="comment">// 同理</span></span><br><span class="line">dog.eat.apply(cat) <span class="comment">// cat eat bones</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">/* cat有run()方法，dog有eat()方法 */
+const cat = {
+    name:&#39;cat&#39;,
+    run() {
+        console.log(this.name +&#39; can run&#39;)
+    }
+}
+const dog = {
+    name:&#39;dog&#39;,
+    eat() {
+        console.log(this.name +&#39; eat bones&#39;)
+    },
+    count(a, b) {
+        console.log(`${this.name}:${a} + ${b} = ${a + b}`)
+    }
+}
 
+cat.run() // cat can run
+
+// 此时dog没有run方法，但dog也想调用run怎么办呢
+cat.run.apply(dog) // dog can run
+// 同理
+dog.eat.apply(cat) // cat eat bones</code></pre>
 <p>由这个例子可以得出，apply函数(还有后面的call函数)是将一个对象已有的函数给另一个对象调用，<strong>同时改变了<code>this</code>的指向</strong></p>
 <h2 id="联系与区别"><a href="#联系与区别" class="headerlink" title="联系与区别"></a>联系与区别</h2><ul>
 <li><p>共同之处：都可以用来代替另一个对象调用一个方法，将一个函数的对象上下文从初始的上下文改变为由thisObj指定的新对象。</p>
@@ -263,13 +334,23 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* apply()方法 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>.<span class="title">apply</span>(<span class="params">thisObj[, argArray]</span>);</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">/* <span class="title">call</span>(<span class="params"></span>)方法 */</span></span><br><span class="line"><span class="function"><span class="title">function</span>.<span class="title">call</span>(<span class="params">thisObj[, arg1[, arg2[, [,...argN]]]]</span>);</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">/* apply()方法 */
+function.apply(thisObj[, argArray]);
 
+/* call()方法 */
+function.call(thisObj[, arg1[, arg2[, [,...argN]]]]);</code></pre>
 <p>在设计上，<strong>call本质是apply的语法糖</strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">dog.count(<span class="number">1</span>,<span class="number">3</span>) <span class="comment">// dog:1 + 3 = 4</span></span><br><span class="line">dog.count.apply(cat) <span class="comment">// cat:undefined + undefined = NaN</span></span><br><span class="line"></span><br><span class="line">dog.count.apply(cat,[<span class="number">2</span>,<span class="number">4</span>]) <span class="comment">// cat:2 + 4 = 6</span></span><br><span class="line"><span class="comment">// apply接收一个调用对象和参数表对象，即apply的参数表有两个对象</span></span><br><span class="line">dog.count.call(cat,<span class="number">2</span>,<span class="number">4</span>) <span class="comment">// cat:2 + 4 = 6</span></span><br><span class="line"><span class="comment">// call接收一个调用对象和其全部参数，即call的参数表可以有不定多个</span></span><br></pre></td></tr></table></figure>
+<pre><code class="javascript">dog.count(1,3) // dog:1 + 3 = 4
+dog.count.apply(cat) // cat:undefined + undefined = NaN
 
-<h2 id="call与apply的应用"><a href="#call与apply的应用" class="headerlink" title="call与apply的应用"></a>call与apply的应用</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">19</span>, <span class="number">6</span>];</span><br><span class="line"><span class="comment">//例子：求数组中的最值</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.max.call(<span class="literal">null</span>, <span class="number">1</span>,<span class="number">2</span>,<span class="number">19</span>,<span class="number">6</span>)); <span class="comment">// 19</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Math</span>.max.apply(<span class="literal">null</span>, arr)); <span class="comment">//  19 直接可以用arr1传递进去</span></span><br></pre></td></tr></table></figure>
-
+dog.count.apply(cat,[2,4]) // cat:2 + 4 = 6
+// apply接收一个调用对象和参数表对象，即apply的参数表有两个对象
+dog.count.call(cat,2,4) // cat:2 + 4 = 6
+// call接收一个调用对象和其全部参数，即call的参数表可以有不定多个</code></pre>
+<h2 id="call与apply的应用"><a href="#call与apply的应用" class="headerlink" title="call与apply的应用"></a>call与apply的应用</h2><pre><code class="javascript">let arr = [1, 2, 19, 6];
+//例子：求数组中的最值
+console.log(Math.max.call(null, 1,2,19,6)); // 19
+console.log(Math.max.apply(null, arr)); //  19 直接可以用arr1传递进去</code></pre>
 <p><strong>相关阅读:</strong></p>
 <p><a href="https://www.cnblogs.com/strick/p/5838126.html" target="_blank" rel="noopener">《你不知道的JavaScript》整理（四）——原型 - 咖啡机(K.F.J)</a></p>
 <p><a href="https://www.liaoxuefeng.com/wiki/1022910821149312/1023021997355072" target="_blank" rel="noopener">原型继承 - 廖雪峰的官方网站</a></p>

@@ -39,9 +39,24 @@
 
 
 
+    <!-- mathjax script -->
     
     
         
+    
+
+
+
+
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?0d53ba8f0fba478a1a58df931ebcbec7";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
     
 
 </head>
@@ -206,16 +221,35 @@
 </li>
 <li><p>静态标记：由程序员自己创建。例如<code>&lt;div class=&quot;nav&quot;&gt;&lt;/div&gt;</code>改为<code>&lt;nav&gt;&lt;/nav&gt;</code>，更加语义化，但自动化程度低。</p>
 <p>缺点：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">header</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">header</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">    header &gt; section &gt; nav &gt; div &gt; ul &gt; li &#123;</span><br><span class="line">        margin: 0;</span><br><span class="line">    &#125;</span><br><span class="line">    header &gt; section &gt; nav &gt; div &gt; ul &gt; li &gt; a &#123;</span><br><span class="line">        color: red;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="html">&lt;header&gt;
+  &lt;section&gt;
+    &lt;nav&gt;
+      &lt;div&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/nav&gt;
+  &lt;/section&gt;
+&lt;/header&gt;
+&lt;style&gt;
+    header &gt; section &gt; nav &gt; div &gt; ul &gt; li {
+        margin: 0;
+    }
+    header &gt; section &gt; nav &gt; div &gt; ul &gt; li &gt; a {
+        color: red;
+    }
+&lt;/style&gt;</code></pre>
 <ol>
 <li>样式选择器十分复杂</li>
 <li>不利于改变HTML结构，CSS难以维护</li>
 </ol>
 </li>
 <li><p>模块化标记（BEM原则）：由模板创建，但命名由程序员决定。例如</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span> <span class="attr">class</span>=<span class="string">"nav"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"nav__continer"</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"nav__item"</span>&gt;</span></span><br><span class="line">		  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/"</span> <span class="attr">class</span>=<span class="string">"nav__link"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="html">&lt;nav class=&quot;nav&quot;&gt;
+  &lt;ul class=&quot;nav__continer&quot;&gt;
+      &lt;li class=&quot;nav__item&quot;&gt;
+          &lt;a href=&quot;/&quot; class=&quot;nav__link&quot;&gt;</code></pre>
 </li>
 </ul>
 <h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><h3 id="命名风格"><a href="#命名风格" class="headerlink" title="命名风格"></a>命名风格</h3><ul>
@@ -226,7 +260,15 @@
 <li>分离容器与内容：css选择器只选择可复用的类名，而不管元素是什么。</li>
 </ul>
 <p>举例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- OOCSS --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"toggle simple"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"toggle-control open"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"toggle-title"</span>&gt;</span>Title 1<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"toggle-details open"</span>&gt;</span></span><br><span class="line">        ....</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="html">&lt;!-- OOCSS --&gt;
+&lt;div class=&quot;toggle simple&quot;&gt;
+    &lt;div class=&quot;toggle-control open&quot;&gt;
+        &lt;h1 class=&quot;toggle-title&quot;&gt;Title 1&lt;/h1&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;toggle-details open&quot;&gt;
+        ....
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
 </li>
 <li><p>SMACSS(Scalable and Modular Architecture for CSS,模块化架构可拓展的CSS):<br>原则：</p>
 <ul>
@@ -237,7 +279,14 @@
 <li>主题：可更换的视觉风格样式，例<code>simple</code></li>
 </ul>
 <p>举例：(BootStrap就是一个例子)</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- SMACSS --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"toggle toggle-simple"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"toggle-control is-active"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"toggle-title"</span>&gt;</span>Title 2<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"toggle-details is-active"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="html">&lt;!-- SMACSS --&gt;
+&lt;div class=&quot;toggle toggle-simple&quot;&gt;
+    &lt;div class=&quot;toggle-control is-active&quot;&gt;
+        &lt;h2 class=&quot;toggle-title&quot;&gt;Title 2&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;toggle-details is-active&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
 </li>
 <li><p>BEM(Block Element Modifier,块元素修饰符)：</p>
 <p>BEM是SMACSS的一个方面，是一个css命名规则</p>
@@ -249,8 +298,14 @@
 <li>即命名：块名__元素–修饰符</li>
 </ul>
 <p>举例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- BEM --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"toggle toggle--simple"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"toggle__control toggle__control--active"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"toggle__title"</span>&gt;</span>Title 2<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"toggle__details toggle__details--is-active"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="html">&lt;!-- BEM --&gt;
+&lt;div class=&quot;toggle toggle--simple&quot;&gt;
+    &lt;div class=&quot;toggle__control toggle__control--active&quot;&gt;
+        &lt;h2 class=&quot;toggle__title&quot;&gt;Title 2&lt;/h2&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;toggle__details toggle__details--is-active&quot;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
 </li>
 </ul>
 <p>注：这几种风格可以混合使用。</p>
@@ -258,16 +313,54 @@
 <li><p><strong>单一职责原则</strong></p>
 <p>该原则规定，创建的样式必须单一，高度聚焦；目的单一。</p>
 <p>例：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.padding-10</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.padding-20</span> &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="css">.padding-10 {
+    padding: 10px;
+}
+.padding-20 {
+    padding: 20px;
+}</code></pre>
 </li>
 <li><p><strong>单一样式来源</strong></p>
 <p>该原则将单一职责原则应用到更深层次，每个css类名单一用途的同时，每个标签的样式也<strong>只有单一的来源</strong>。任何组件的设计必须由组件本身决定，不能被其父类元素类名限制。即<strong>一个类名可以完全控制这个类的样式，不会受其父类影响</strong></p>
 <p>例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"blog"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"blog-header"</span>&gt;</span>This is Blog header.<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"calendar"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span> <span class="attr">class</span>=<span class="string">"calendar-header"</span>&gt;</span>This is calendar header.<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">	<span class="comment">/* calendar css */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.calendar-header</span>&#123;</span></span><br><span class="line">        color: red;</span><br><span class="line">        font-size: 2em;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="comment">/* blog css */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.blog-header</span>&#123;</span></span><br><span class="line">        color: black;</span><br><span class="line"><span class="css">        <span class="selector-tag">font-size</span>: 2<span class="selector-class">.4em</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="comment">/* public css */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.blog</span> <span class="selector-class">.calendar</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">font-size</span>: 1<span class="selector-class">.5em</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="html">&lt;div class=&quot;blog&quot;&gt;
+    &lt;h2 class=&quot;blog-header&quot;&gt;This is Blog header.&lt;/h2&gt;
+    &lt;div class=&quot;calendar&quot;&gt;
+        &lt;h2 class=&quot;calendar-header&quot;&gt;This is calendar header.&lt;/h2&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;style&gt;
+    /* calendar css */
+    .calendar-header{
+        color: red;
+        font-size: 2em;
+    }
+    /* blog css */
+    .blog-header{
+        color: black;
+        font-size: 2.4em;
+    }
+    /* public css */
+    .blog .calendar{
+        font-size: 1.5em;
+    }
+&lt;/style&gt;</code></pre>
 <p>问题：共用的样式无处安放，所以有了如下改进：<strong>带上下文的样式</strong></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">	<span class="comment">/* calendar css */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.calendar-header</span>&#123;</span></span><br><span class="line">        color: red;</span><br><span class="line">        font-size: 2em;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="selector-class">.blog</span> <span class="selector-class">.calendar-header</span>&#123;</span></span><br><span class="line"><span class="css">        <span class="selector-tag">font-size</span>: 1<span class="selector-class">.5em</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="css">    <span class="comment">/* blog css */</span></span></span><br><span class="line"><span class="css">    <span class="selector-class">.blog-header</span>&#123;</span></span><br><span class="line">        color: black;</span><br><span class="line"><span class="css">        <span class="selector-tag">font-size</span>: 2<span class="selector-class">.4em</span>;</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+<pre><code class="html">&lt;style&gt;
+    /* calendar css */
+    .calendar-header{
+        color: red;
+        font-size: 2em;
+    }
+    .blog .calendar-header{
+        font-size: 1.5em;
+    }
+    /* blog css */
+    .blog-header{
+        color: black;
+        font-size: 2.4em;
+    }
+&lt;/style&gt;</code></pre>
 <p>若采用BEM可以在上下文样式中加入带状态的组件样式。</p>
 </li>
 </ul>
