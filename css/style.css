@@ -637,16 +637,6 @@ header label {
 .post-wrap .categories-card .card-item .categories {
   overflow: hidden;
 }
-.categories h3 {
-  display: inline-block;
-}
-.categories span {
-  float: right;
-  padding-right: 1em;
-}
-.categories .more-post-link {
-  float: right;
-}
 .tag-cloud-tags {
   margin: 10px 0;
   padding-top: 2em;
