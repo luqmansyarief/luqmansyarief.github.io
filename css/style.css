@@ -577,7 +577,7 @@ header label {
 .post-wrap {
   position: relative;
   width: 100%;
-  max-width: 780px;
+  max-width: 670px;
   margin: 0 auto;
   padding-top: 2rem;
 }
@@ -1236,7 +1236,6 @@ header label {
   padding: 2px 4px;
   background: #f7f7f7;
   font-family: Menlo, Monaco, Consolas, Courier New, monospace;
-  font-size: 12px;
 }
 .post-content pre {
   padding: 10px;
