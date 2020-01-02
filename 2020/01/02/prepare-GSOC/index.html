@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="referrer" content="no-referrer">
+
+    <meta name="author" content="Sirice">
+
+
+
+    <meta name="description" content="this site is Sirice's blog.">
+
+
+    <meta name="keywords" content="Sirice, LiuZijian, Blog, CodeBlog">
+
+
+<title>关于Google Summer of Code 的记事贴 | Sirice&#39;s blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+
+    <!-- mathjax script -->
+    
+    
+        
+    
+
+
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Sirice&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/collection">Collections</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Sirice&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/collection">Collections</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">关于Google Summer of Code 的记事贴</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Sirice</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">January 2, 2020&nbsp;&nbsp;15:58:36</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p><em>提示：本文中大部分链接是google子站，需要科学上网。</em></p>
+<h1 id="什么是GSOC"><a href="#什么是GSOC" class="headerlink" title="什么是GSOC"></a>什么是GSOC</h1><blockquote>
+<p>Google Summer of Code (GSoC) is a global program that matches students up with open source, free software and technology-related organizations to write code and get paid to do it! The organizations provide mentors who act as guides through the entire process, from learning about the community to contributing code. The idea is to get students involved in and familiar with the open source community and help them to put their summer break to good use.</p>
+</blockquote>
+<blockquote>
+<p>Google 编程之夏是一个全球性项目，旨在为学生们和开源、自由软件、技术相关的组织建立联系，让学生们贡献代码并获得报酬！组织会提供导师，在学生从熟悉社区到贡献代码的整个过程中提供指导。这个想法的目的是让学生们参与和熟悉开源社区，并帮助他们充分利用暑假时间去得到锻炼。</p>
+</blockquote>
+<p>以上是一份来自<a href="https://summerofcode.withgoogle.com/" target="_blank" rel="noopener">官网</a>的简介。更多细节可以参考这个 <a href="http://write.flossmanuals.net/gsocstudentguide/what-is-google-summer-of-code/" target="_blank" rel="noopener">What-Is-Google-Summer-Of-Code / GSoCStudentGuide</a></p>
+<h1 id="官方指南（Official-Guide）"><a href="#官方指南（Official-Guide）" class="headerlink" title="官方指南（Official Guide）"></a>官方指南（Official Guide）</h1><p>这是一份<a href="https://google.github.io/gsocguides/" target="_blank" rel="noopener">官方指南书</a>，分为导师指南和学生指南。</p>
+<h1 id="TimeLine"><a href="#TimeLine" class="headerlink" title="TimeLine"></a>TimeLine</h1><p><a href="https://developers.google.com/open-source/gsoc/timeline" target="_blank" rel="noopener">https://developers.google.com/open-source/gsoc/timeline</a></p>
+<p><img src="https://i.loli.net/2020/01/02/P4QT3nmqExiOthV.png" alt="2020年时间表"></p>
+<p>注意：<strong>3月16日学生申请开始，3月31日截止</strong>。</p>
+<h1 id="联络"><a href="#联络" class="headerlink" title="联络"></a>联络</h1><ul>
+<li><a href="https://gitter.im/Gsoc-cn/Lobby" target="_blank" rel="noopener">Gitter://GSoC-CN</a></li>
+<li>QQ: 370160773 (GSOC 中国学生)</li>
+</ul>
+<h1 id="博客文章"><a href="#博客文章" class="headerlink" title="博客文章"></a>博客文章</h1><ul>
+<li><a href="http://geekplux.com/2018/01/07/experience-of-gsoc-google-summer-of-code.html" target="_blank" rel="noopener">参加 Google Summer of Code 的体验</a></li>
+<li><a href="https://www.cnwangjie.com/blog/post/%E8%BF%99%E6%98%AF%E4%B8%80%E7%AF%87%E5%85%B3%E4%BA%8EGoogleSummerOfCode%E7%9A%84%E4%BB%8B%E7%BB%8D/" target="_blank" rel="noopener">这是一篇关于 Google Summer of Code 的介绍</a></li>
+</ul>
+<h1 id="相关材料"><a href="#相关材料" class="headerlink" title="相关材料"></a>相关材料</h1><p>github repo:</p>
+<ul>
+<li><a href="https://github.com/rstats-gsoc/gsoc2020" target="_blank" rel="noopener">rstats-gsoc/gsoc2020: R project in Google Summer of Code 2020</a></li>
+<li><a href="https://github.com/mozilla/GSOC2020" target="_blank" rel="noopener">mozilla/GSOC2020: Mozilla and GSOC 2020</a></li>
+<li><a href="https://github.com/gsoc-cn/gsoc-cn" target="_blank" rel="noopener">【经验&amp;资源】gsoc-cn/gsoc-cn: Google Summer of Code 中文相关资料</a></li>
+</ul>
+<p>其中上面这个链接包含很多有用内容。例如申请的动议 <a href="https://github.com/gsoc-cn/gsoc-cn/tree/master/resources" target="_blank" rel="noopener">proposal</a></p>
+<p>知乎经验文章：</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/27823910" target="_blank" rel="noopener">Google Summer of Code 学生申请指南 - 知乎</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/27330699" target="_blank" rel="noopener">【重要，这个必看】Google 编程之夏(GSoC)：海量优质项目，丰厚报酬，你竟然还不知道？ - 知乎</a></li>
+</ul>
+<p>其中上面这篇文章讲的十分详细，重要点做个摘要：</p>
+<blockquote>
+<h3 id="时间安排和工作模式"><a href="#时间安排和工作模式" class="headerlink" title="时间安排和工作模式"></a>时间安排和工作模式</h3><p>以 2017 年为例。5 月 4 日 Google 宣布入选学生名单，之后到 5 月 30 日约一个月的时间为 Community Bonding Period，在这段时间里可以熟悉社区、和导师针对你的项目进行探讨等。5 月 31 日开始至 8 月 29 日是正式工作时间，你将会在约 12 周的时间里完成你所申请的项目。除了开始时间略早于国内期末考试时间外，时间跨度上基本与大部分暑期实习无异。而具体的任务量因项目而异，但通常不会太过繁重。导师也一般不会为难你，即使不能全部完成预期的内容，只要全程认真负责的参与，大都也会给 Pass。可能更多的时候是项目对中国学生而言是比较水的，比如前几天（Coding Period 才刚刚开始）群里就有人表示已经把全部 Coding 做完了现在正无聊的写文档……</p>
+<p>GSoC 的任务全部是线上（online）完成的，相对于实习时每日早晚高峰痛苦的挤地铁（不忍吐槽帝都的交通），你完全可以在家中、在学校宿舍完成需要做的一切。简捷高效，不要太省心！</p>
+<h3 id="报酬"><a href="#报酬" class="headerlink" title="报酬"></a>报酬</h3><p>降价之前的报酬折算至每月是 11K 有余，几乎快赶上一线互联网公司的正式应届员工价格了。降价之后大概是一月 8K 多，仍然是碾压各家一线的实习生价格。还不用扣税哟！</p>
+<h3 id="个人成长"><a href="#个人成长" class="headerlink" title="个人成长"></a>个人成长</h3><p>在 GSoC 项目期间，每个学生都会被分配一名导师，在整个项目期间给予你帮助。就我的亲身经历和身边人的体会，虽然会有些比较懒的放养导师，不过基本上还都是非常认真负责而且热心的。导师本身的技术水平也都十分出色。而如果你参与的是 GCC、OpenCV 这类久负盛名的工具、语言、框架的组织下的项目，很可能你的导师就会是这些组织的 Core Team Developer，他们可都是在行业内备受尊敬的大牛。</p>
+<p>再拿我的经历举例。有一次我向主仓库提交了一段总计不超过 50 行的改动，但因为改动较为关键，组织内的几个导师和我充分的讨论了足足一周，覆盖了代码风格、性能优化、可测试性、向前和向后兼容、设计原则等方方面面，经过数次修改，最终成功并入。这个过程中是收获巨大的。通常我们会讲被 review 是非常好的学习途径，写越少而精的代码，被 review 的越详细，对应的成长是越快的。而 GSoC 正是这种模式。</p>
+<p>相比而言，大部分一线开发岗位的实习，负责带你的人很可能也只是刚毕业工作过三五年，本身技术水平不算惊艳，而业务导向的开发则是以效率为先的，很难有机会有人给你的代码做详尽细致的 review。更糟糕的一些情况是，可能有些实习生大部分时间都在做“打杂”的工作，而不能进行真正有意义的创造，更谈不上学习了。<br>当然实习也绝不能被一棍子打死，像 MSRA 的研究实习生、BAT TMD 华为这些一线公司的实验室或者核心部门实习也都是相当有含金量的，其中也有很多 GSoC 中所不能学习到的东西，也是非常值得选择的。</p>
+<p>综上来看，GSoC 的质量是相当高的，从各方面来看，都非常值得参与。Google 官方资料中有这样一句话：</p>
+<p>Successful students have widely reported that their participation in GSoC made them more attractive to potential employers and that the program has helped greatly when embarking on their technical careers.</p>
+<p>GSoC 在世界范围内都很受认可，成功的完成 GSoC 项目的你会更容易受到用人公司的青睐。如果未来希望加入 Google，这段经历则更是一大加分项。</p>
+<h3 id="申请资格、流程和技巧"><a href="#申请资格、流程和技巧" class="headerlink" title="申请资格、流程和技巧"></a>申请资格、流程和技巧</h3><p>任何在读的本科、硕士、博士生均可以申请 GSoC。如果你已经毕业了，那就非常遗憾不能再以学生身份参与 GSoC 了。Google 还有一些更细节的要求，但一般都是可以满足的，具体可参照：FAQ#What are the eligibility requirements for participation?</p>
+<p>Google 每年都会发布 GSoC 的时间表，例如 2017 年的：Google Summer of Code 2017 Timeline</p>
+<p>其中有一项是 List of accepted mentoring organizations published，即宣布当年的组织列表，每个组织都会有一个主页，列出可供你选择的 Project Ideas。今年是在 2 月 27 日宣布的。在这之后你就可以查看成百上千个 Ideas 并找出你所感兴趣的了。在 Student application deadline 之前（今年为 4 月 3 日），你可以向 Google 提交至多 5 份 Proposals，每一份 Proposal 要包含你对其中一个 Idea 的设想、实施方案、时间规划等，Proposal 需要写的具体内容因组织者的要求而异。此后由组织负责审阅所有学生提交的 Proposals，选出他们所认为优秀的。在约一个月之后（今年为 5 月 4 日），Google 会宣布被选中的学生列表，如果你顺利通过，便可以开始当年的 GSoC 之旅了！</p>
+</blockquote>
+<blockquote>
+<h3 id="关于项目选择"><a href="#关于项目选择" class="headerlink" title="关于项目选择"></a>关于项目选择</h3><p>首先是选什么。参与 GSoC 的组织会有数百个，一个个看根本看不过来，选择困难症们可要头疼了。我的建议是选择自己有过实际使用经验的，相对于从未使用过的语言、框架等，你会对它们更加了解，比如今年我就考虑了 homebrew、checkstyle（Java 静态检查工具，很早就引入了 PKU Helper 开发之中，后来我也最终选择了这个组织下的项目）；其次，选择与自身技术栈相匹配的，比如我最擅长的技术栈是 JVM Based Language，我就会更加留意用到 Java、Clojure、Scala 的项目。</p>
+<p>划定了最初范围之后，你就可以通过组织公开的联络渠道，同导师们联（套）系（磁）。通常来讲以 Mailing List 和 IRC 居多，也有 IM。你可以进一步的了解这些组织和下属的项目，从而找到你最感兴趣的。虽然每个人可以填写多至 5 份 Proposals，但就实际经验而言，认真书写一份 Proposal 就要花费非常多的精力了，广撒网是不太可取的，重在精不在多。</p>
+<p>在选定了 checkstyle 之后，我非常感兴趣一个叫 Optimization of Distance Between Methods in Single Java Class 的项目。它涉及到算法、数学模型，非常有趣同时又附有挑战性。</p>
+<p>之后就是为此撰写 Proposal，其中分为了三大部分：About Me、Project 和 Extra Information。About Me 就是一些个人基本信息和编程技能的介绍，Extra Information 给出了我的工作时间、时区和一些想说的话。Project 是最要的部分，包含了 Project Description、Outline 和 Expected Timeline。其中详细的给出了我预想的数学模型的设计、统计分析过程、可使用的算法和实现以及会为此撰写一篇 Article。</p>
+<p><strong>书写 Proposal</strong>的重点在我看来就是要认真细致、考虑可行性和工作量、和导师们充分讨论，最后再加上一条美观。在以上的方法论下我花费了一周多的时间磨出一份颜值甚高的 Proposal 来，和导师们也讨论的风生水起。本来觉得拿到这个项目板上钉钉了，结果离 application deadline 还有两天的时候，导师突然私信我说，我们认为这个项目太难了，我们可能找不到足够多的导师来带你，所以你赶紧再找一个项目赶一篇 Proposal 出来吧。我：？？？……没办法，花了半天的时间挑了另一个看着还可以的项目火速写了一篇出来。导师也够意思，跟我说你随便写写思路就完了，不用太详细。之后赶在 deadline 前顺利上交两份 Proposals，并且中了后面那篇。</p>
+<p>导师对我的 Proposal 评价很高，如果以后有申请的小伙伴感兴趣想参考的话可以移步 Google Docs：<a href="https://docs.google.com/document/d/1lWXpWhUN6cE06sjQANjWxamc_X3ddbSphTRSofChLyk/edit" target="_blank" rel="noopener">Optimization of Distance Between Methods in Single Java Class</a>、<a href="https://docs.google.com/document/d/1xu6SE4qeKTRQ45R9FSLOQB-t5ExzBGyvU9FLGifvxY0/edit" target="_blank" rel="noopener">Regression Testing Tool and HTML Report Generator for Pull Request</a></p>
+<p>除了一份质量过硬的 Proposal 之外，在宣布最终名单之前和导师们的套磁也是非常重要的！多在 Mailing List 中刷刷脸，积极参与讨论。如果能够提出 Bug 甚至修复 Bug 或者实现新的 Feature 那是最好的。Checkstyle 的导师在最开始就清楚的写到学生的 Fixed Issue 数是很重要的指标。后来在 deadline 之前我足足交了 8 个 PR 位列十多个竞争者第一，这点也为我最终被选中加了不少分。</p>
+<p>总结一下，认真投入、积极参与、多讨论多反馈，甚至去帮助社区中的其他开发者，那么你就会有非常大的机会被选中！今年 4764 名提交了 Proposals 的学生中有 1318 名被选中，入选率大于四分之一，是相当高的。而且这 4764 人里其实有很多人是根本没有好好写 Proposal 的，也有很多人是水平真的很差也过来申请的。所以对绝大多数基础不差的国内大学生来讲，只要好好申请都是比较容易中的。</p>
+</blockquote>
+<h1 id="贡献指南"><a href="#贡献指南" class="headerlink" title="贡献指南"></a>贡献指南</h1><p>可以贡献给 <a href="https://github.com/gsoc-cn" target="_blank" rel="noopener">gsoc-cn</a>，本人只做简单记录和攻略收集。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Sirice</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://siricee.github.io/2020/01/02/prepare-GSOC/">https://siricee.github.io/2020/01/02/prepare-GSOC/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>本文采用<a href="http://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享 署名-非商业性使用-禁止演绎(CC BY-NC-ND)国际许可协议</a>进行许可</span>
+                    </p>
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2019/12/31/bye-2019/">再见2019</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Sirice | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+    
+        <script type="text/javascript" color="0,0,0" opacity="0.3" zindex="-2" count="99" src="/js/canvas-nest.js"></script>
+    
+</body>
+</html>
