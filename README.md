@@ -2,6 +2,7 @@
 Welcome to my blog!
 
 Please click [https://siricee.github.io/](https://siricee.github.io/) to enter the site.
+also: https://www.bangluq.com/
 
 Powered by [Hexo](https://hexo.io/) Theme [Chic](https://github.com/Siricee/hexo-theme-Chic) designed by Sirice.
 
